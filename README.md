@@ -2,6 +2,6 @@
 
 To run:
 ```console
-javac gedcomParser.java
-java gedcomParser test-gedcom-files/Zaccaria.ged > out.txt
+javac GedcomParser.java
+java GedcomParser test-gedcom-files/Zaccaria.ged > out.txt
 ```
