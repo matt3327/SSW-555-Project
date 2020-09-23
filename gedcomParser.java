@@ -131,7 +131,7 @@ public class GedcomParser {
 
     }
 
-    // making  of a family
+    // making of a family
     public class Family {
 
         //characteristics
@@ -245,13 +245,6 @@ public class GedcomParser {
             
             //loops through every line in the gedcom file
             while (sc.hasNextLine()) {
-                // if (sc.hasNextLine()) {
-                //     line = sc.nextLine();
-                //     parts = line.split(" ", 3); 
-                // }
-                // // breaks out of loop when no other lines
-                // else
-                //     break;
 
                 // format: 0 <id> <tag>
                 // valid tags: INDI or FAM
@@ -268,8 +261,6 @@ public class GedcomParser {
                         
                         // while INDI or FAM line not apparent
                         while (!parts[0].equals("0")) {
-                            // line = sc.nextLine();
-                            // parts = line.split(" ", 3); 
 
                             // searches through array to get relevant individual and sets accordingly
                     		if (parts[0].equals("1") && parts.length == 3) {
@@ -385,11 +376,10 @@ public class GedcomParser {
             }
             sc.close();
             
-            // print ids in order
-            // TODO: currently printing odd ones twice, pls fix
-            // TODO: not mapping names for families
+            // TODO: currently printing everything twice
             // TODO: make it a pretty table
             // see https://github.com/skebir/prettytable
+            // TODO: fix sorting issues with special characters
 
             // Individuals
             Collections.sort(individuals, gedcom.new SortIndividuals());
