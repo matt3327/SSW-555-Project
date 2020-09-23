@@ -101,7 +101,7 @@ public class GedcomParser {
         }
         
         public String getBirthDate() {
-            return this.name;
+            return this.birthDate;
         }
 
         public void setDeathDate(String deathDate) {
@@ -237,12 +237,15 @@ public class GedcomParser {
             Scanner sc = new Scanner(new File(args[0]));
             String line;
             String[] parts;
+            line = sc.nextLine();
+            parts = line.split(" ", 3);
+            
             
             //loops through every line in the gedcom file
             while (sc.hasNextLine()) {
-                line = sc.nextLine();
+                // line = sc.nextLine();
                 System.out.println(line);
-                parts = line.split(" ", 3);
+                // parts = line.split(" ", 3);
                 for(String part: parts){
                     System.out.print(part + ",");
                 }
@@ -283,35 +286,39 @@ public class GedcomParser {
                     			else if (parts[1].equals("FAMS"))
                     				getIndividualById(currentId).setSpouseFamily(parts[2]);
                     		}
-                    		else if (parts[0].equals("1") && parts.length > 1) {
-                                System.out.println("hello");
-                                // sets birth or death
-                    			if (parts[1].equals("BIRT")) {
-                                    line = sc.nextLine();
-                                    System.out.println(line);
-                                    parts = line.split(" ", 3); 
-                                    for(String part: parts){
-                                        System.out.print(part + ",");
-                                    }
-                                    System.out.println("hi");
-                                    if (parts[0].equals("2") && parts[1].equals("DATE")){
-                                        System.out.println("date");
-                                        getIndividualById(currentId).setBirthDate(parts[2]);
-                                    }
-                    			}
-                    			//usually of the format 1 DEAT Y - assignment specs say no args
-                    			else if (parts[1].equals("DEAT")) {
-                                    line = sc.nextLine();
-                                    System.out.println(line);
-                                    parts = line.split(" ", 3); 
-                                    for(String part: parts){
-                                        System.out.print(part + ",");
-                                    }
-                                    System.out.println();
-                                    if (parts.length == 3 && parts[0].equals("2") && parts[1].equals("DATE"))
-                                    	getIndividualById(currentId).setDeathDate(parts[2]);
-                    			}
-                    		}
+                            
+                            System.out.println("hello");
+                            // sets birth or death
+                            if (parts[1].equals("BIRT")) {
+                                line = sc.nextLine();
+                                System.out.println(line);
+                                parts = line.split(" ", 3); 
+                                for(String part: parts){
+                                    System.out.print(part + ",");
+                                }
+                                System.out.println("hi");
+                                if (parts[0].equals("2") && parts[1].equals("DATE")){
+                                    System.out.println("date");
+                                    getIndividualById(currentId).setBirthDate(parts[2]);
+                                }
+                            }
+                            //usually of the format 1 DEAT Y - assignment specs say no args
+                            if (parts[1].equals("DEAT")) {
+                                line = sc.nextLine();
+                                System.out.println(line);
+                                parts = line.split(" ", 3); 
+                                for(String part: parts){
+                                    System.out.print(part + ",");
+                                }
+                                System.out.println("bop");
+                                if (parts[0].equals("2") && parts[1].equals("DATE")){
+                                    System.out.println("date");
+                                    getIndividualById(currentId).setDeathDate(parts[2]);
+                                }
+                                else{
+                                    System.out.println("boo");
+                                }
+                            }
                             
                             // looks at the next line in the document
                     		if (sc.hasNextLine()) {
@@ -370,16 +377,25 @@ public class GedcomParser {
                     		}
                     		
                     		// looks at the next line in the document
-                    		if (sc.hasNextLine()) {
-                    			line = sc.nextLine();
-                                parts = line.split(" ", 3); 
-                            }
-                            // breaks out of loop when no other lines
-                    		else
-                    			break;
+                    		// if (sc.hasNextLine()) {
+                    		// 	line = sc.nextLine();
+                            //     parts = line.split(" ", 3); 
+                               
+                            // }
+                            // // breaks out of loop when no other lines
+                    		// else
+                    		// 	break;
                     	}
                     }
                 }
+                if (sc.hasNextLine()) {
+                    line = sc.nextLine();
+                    parts = line.split(" ", 3); 
+                   
+                }
+                // breaks out of loop when no other lines
+                else
+                    break;
             }
             sc.close();
             
