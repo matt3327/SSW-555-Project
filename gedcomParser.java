@@ -4,22 +4,29 @@ import java.util.*;
 
 public class GedcomParser {
 
+    // holds all individuals and families
     public static ArrayList<Individual> individuals = new ArrayList<Individual>();
     public static ArrayList<Family> families = new ArrayList<Family>();
     
+    // takes in Id and returns the Individual that corresponds
     public static Individual getIndividualById(String id) {
+        // iterates through all individuals in the individuals array
     	for (Individual individual : individuals) {
     		if (individual.getId().equals(id))
     			return individual;
-    	}
+        }
+        // if no such individual matches return null
 		return null;
     }
     
+    // takes in family Id and returns Family that corresponds
     public static Family getFamilyById(String id) {
+        // iterates through all families in the family array
     	for (Family family : families) {
     		if (family.getId().equals(id))
     			return family;
-    	}
+        }
+        // if no such family matches return null
 		return null;
     }
     
@@ -39,7 +46,10 @@ public class GedcomParser {
         } 
     } 
 
+    // making of an individual
     public class Individual {
+
+        //characteristics
         private final String id;
         private String name;
         private String gender;
@@ -50,6 +60,7 @@ public class GedcomParser {
         private String childFamilyId;
         private String spouseFamilyId;
 
+        // instantiating an individual
         public Individual(final String id) {
             this.id = id;
             this.name = null;
@@ -59,8 +70,11 @@ public class GedcomParser {
             this.alive = true;
             this.childFamilyId = null;
             this.spouseFamilyId = null;
+            // once individual is created, then added to the array of individuals
             individuals.add(this);
         }
+
+        // getters and setters
 
         public String getId() {
             return this.id;
@@ -87,7 +101,7 @@ public class GedcomParser {
         }
         
         public String getBirthDate() {
-            return this.name;
+            return this.birthDate;
         }
 
         public void setDeathDate(String deathDate) {
@@ -117,8 +131,10 @@ public class GedcomParser {
 
     }
 
+    // making  of a family
     public class Family {
 
+        //characteristics
         private final String id;
         private String husbandId;
         private String husbandName;
@@ -129,16 +145,21 @@ public class GedcomParser {
         private boolean divorced;
         private String divorceDate;
 
+        // instantion of a family
         public Family(final String id) {
             this.id = id;
             this.husbandId = null;
+            this.husbandName = null;
             this.wifeId = null;
+            this.wifeName = null;
             this.children = new ArrayList<String>();
             this.marriedDate = null;
             this.divorced = false;
             this.divorceDate = null;
             families.add(this);
         }
+
+        // getters and setters
         
         public String getId() {
             return this.id;
@@ -208,33 +229,51 @@ public class GedcomParser {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-    	
+        
+        // create to call families and individuals
     	GedcomParser gedcom = new GedcomParser();
 
         if (args.length == 1) {
             Scanner sc = new Scanner(new File(args[0]));
-            String line;
-            String[] parts;
+            String line = null;
+            String[] parts = null;
+
+            if (sc.hasNextLine()) {
+                line = sc.nextLine();
+                parts = line.split(" ", 3);
+            }
             
             //loops through every line in the gedcom file
             while (sc.hasNextLine()) {
-                line = sc.nextLine();
-                parts = line.split(" ", 3);
-                
+                // if (sc.hasNextLine()) {
+                //     line = sc.nextLine();
+                //     parts = line.split(" ", 3); 
+                // }
+                // // breaks out of loop when no other lines
+                // else
+                //     break;
+
                 // format: 0 <id> <tag>
                 // valid tags: INDI or FAM
                 if (parts[0].equals("0") && parts.length == 3) {
-                    
+
                 	//adds all the properties of an individual until it gets to the next 0
                     if (parts[2].equals("INDI")) {
                     	
-                    	String currentId = parts[1];
-                    	individuals.add(gedcom.new Individual(currentId));
-                    	line = sc.nextLine();
+                        String currentId = parts[1];
+                        //creates individual and adds it to the array
+                        individuals.add(gedcom.new Individual(currentId));
+                        line = sc.nextLine();
                         parts = line.split(" ", 3); 
+                        
+                        // while INDI or FAM line not apparent
                         while (!parts[0].equals("0")) {
+                            // line = sc.nextLine();
+                            // parts = line.split(" ", 3); 
+
+                            // searches through array to get relevant individual and sets accordingly
                     		if (parts[0].equals("1") && parts.length == 3) {
-                    			if (parts[1].equals("NAME"))
+                                if (parts[1].equals("NAME"))
                     				getIndividualById(currentId).setName(parts[2]);
                     			else if (parts[1].equals("SEX") && parts[2].matches("M|F")) 
                     				getIndividualById(currentId).setGender(parts[2]);
@@ -243,52 +282,62 @@ public class GedcomParser {
                     			else if (parts[1].equals("FAMS"))
                     				getIndividualById(currentId).setSpouseFamily(parts[2]);
                     		}
-                    		else if (parts[0].equals("1") && parts.length > 1) {
-                    			if (parts[1].equals("BIRTH")) {
-                    				line = sc.nextLine();
-                                    parts = line.split(" ", 3); 
-                                    if (parts.length == 3 && parts[0].equals("2") && parts[1].equals("DATE"))
-                                    	getIndividualById(currentId).setBirthDate(parts[2]);
-                    			}
-                    			//usually of the format 1 DEAT Y - assignment specs say no args
-                    			else if (parts[1].equals("DEATH")) {
-                    				line = sc.nextLine();
-                                    parts = line.split(" ", 3); 
-                                    if (parts.length == 3 && parts[0].equals("2") && parts[1].equals("DATE"))
-                                    	getIndividualById(currentId).setDeathDate(parts[2]);
-                    			}
-                    		}
-                    		
-                    		if (sc.hasNextLine()) {
-                    			line = sc.nextLine();
+                            
+                            // sets birth or death
+                            if (parts[1].equals("BIRT")) {
+                                line = sc.nextLine();
                                 parts = line.split(" ", 3); 
-                    		}
+
+                                if (parts[0].equals("2") && parts[1].equals("DATE")){
+                                    getIndividualById(currentId).setBirthDate(parts[2]);
+                                }
+                            }
+                            //usually of the format 1 DEAT Y - assignment specs say no args
+                            if (parts[1].equals("DEAT")) {
+                                line = sc.nextLine();
+                                parts = line.split(" ", 3); 
+                                
+                                if (parts[0].equals("2") && parts[1].equals("DATE"))
+                                    getIndividualById(currentId).setDeathDate(parts[2]);
+
+                            }
+                            
+                            // looks at the next line in the document
+                    		if (sc.hasNextLine()) {
+                                line = sc.nextLine();
+                                parts = line.split(" ", 3); 
+                            }
+                            // breaks out of loop when no other lines
                     		else
-                    			break;
+                    		    break;
                     	}
                     	
                     }
                     
                     //adds all the properties of a family until it gets to the next 0
-                    if (parts[2].equals("FAM")) {
+                    else if (parts[2].equals("FAM")) {
                     	
-                    	String currentId = parts[1];
+                        String currentId = parts[1];
+                        //creates family and adds it to the array
                     	families.add(gedcom.new Family(currentId));
                     	line = sc.nextLine();
                         parts = line.split(" ", 3); 
+                        // not a family or individual
                         while (!parts[0].equals("0")) {
+                            // adding husband, wife, child to family
                     		if (parts[0].equals("1") && parts.length == 3) {
                     			if (parts[1].equals("HUSB")) {
                     				getFamilyById(currentId).setHusbandId(parts[2]);
-//                    				getFamilyById(currentId).setHusbandName(getIndividualById(parts[2]).getName());
+                   				    getFamilyById(currentId).setHusbandName(getIndividualById(parts[2]).getName());
                     			}
                     			else if (parts[1].equals("WIFE")) {
                     				getFamilyById(currentId).setWifeId(parts[2]);
-//                					getFamilyById(currentId).setWifeName(getIndividualById(parts[2]).getName());
+               					    getFamilyById(currentId).setWifeName(getIndividualById(parts[2]).getName());
                     			}
                     			else if (parts[1].equals("CHIL"))
                     				getFamilyById(currentId).addChildId(parts[2]);
-                    		}
+                            }
+                            // adding married and divorced information
                     		else if (parts[0].equals("1") && parts.length > 1) {
                     			if (parts[1].equals("MARR")) {
                     				line = sc.nextLine();
@@ -304,14 +353,34 @@ public class GedcomParser {
                     			}
                     		}
                     		
+                    		// looks at the next line in the document
                     		if (sc.hasNextLine()) {
                     			line = sc.nextLine();
                                 parts = line.split(" ", 3); 
-                    		}
+                            }
+                            // breaks out of loop when no other lines
                     		else
                     			break;
                     	}
                     }
+                    else {
+                        if (sc.hasNextLine()) {
+                            line = sc.nextLine();
+                            parts = line.split(" ", 3); 
+                        }
+                        // breaks out of loop when no other lines
+                        else
+                            break;
+                    }
+                }
+                else {
+                    if (sc.hasNextLine()) {
+                        line = sc.nextLine();
+                        parts = line.split(" ", 3); 
+                    }
+                    // breaks out of loop when no other lines
+                    else
+                        break;
                 }
             }
             sc.close();
@@ -326,31 +395,31 @@ public class GedcomParser {
             Collections.sort(individuals, gedcom.new SortIndividuals());
             StringBuilder individualsTable = new StringBuilder();
             for (Individual individual : individuals) {
-                individualsTable.append(individual.getId() + " " 
-                		+ individual.getName() + " " 
-                		+ individual.getGender() + " " 
-                		+ individual.getBirthDate() + " "
-                		+ individual.getDeathDate() + " "
-                		+ individual.getChildFamily() + " "
-                		+ individual.getSpouseFamily() + " "
-                		+ "\n");
+                individualsTable.append(individual.getId() + "\t" 
+                		+ individual.getName() + "\t" 
+                		+ individual.getGender() + "\t" 
+                		+ individual.getBirthDate() + "\t"
+                		+ individual.getDeathDate() + "\t"
+                		+ individual.getChildFamily() + "\t"
+                		+ individual.getSpouseFamily() + "\n");
             }
+            System.out.println("indiv id\tname\tgender\tbirth date\tdeath date\tFAMC\tFAMS");
             System.out.println(individualsTable.toString());
 
             // Families 
             Collections.sort(families, gedcom.new SortFamilies());
             StringBuilder familiesTable = new StringBuilder();
             for (Family family : families) {
-                familiesTable.append(family.getId() + " " 
-                + family.getMarriedDate() + " " 
-                + family.getDivorced() + " " 
-                + family.getHusbandId() + " "
-                + family.getHusbandName() + " "
-                + family.getWifeId() + " "
-                + family.getWifeName() + " "
-                + family.getChildrenIds() + " "
-                + "\n");
+                familiesTable.append(family.getId() + "\t" 
+                + family.getMarriedDate() + "\t" 
+                + family.getDivorced() + "\t" 
+                + family.getHusbandId() + "\t"
+                + family.getHusbandName() + "\t"
+                + family.getWifeId() + "\t"
+                + family.getWifeName() + "\t"
+                + family.getChildrenIds() + "\n");
             }
+            System.out.println("fam id\tmarriage date\tdivorced?\thusband id\thusband name\twife id\twife name\tchildren ids");
             System.out.println(familiesTable.toString());
             
         }
