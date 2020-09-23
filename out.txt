@@ -1,510 +1,56 @@
-0 HEAD
-0,HEAD,
-0 NOTE Angelina Zaccaria
-0,NOTE,Angelina Zaccaria,
-1 SOUR Family Echo
-1,SOUR,Family Echo,
-2 WWW http://www.familyecho.com/
-2,WWW,http://www.familyecho.com/,
-1 FILE My Family
-1,FILE,My Family,
-1 DATE 7 SEP 2020
-1,DATE,7 SEP 2020,
-1 DEST ANSTFILE
-1,DEST,ANSTFILE,
-1 GEDC
-1,GEDC,
-2 VERS 5.5.1
-2,VERS,5.5.1,
-2 FORM LINEAGE-LINKED
-2,FORM,LINEAGE-LINKED,
-1 SUBM @I1@
-1,SUBM,@I1@,
-2 NAME Angelina
-2,NAME,Angelina,
-1 SUBN
-1,SUBN,
-1 CHAR UTF-8
-1,CHAR,UTF-8,
-0 @I1@ INDI
-0,@I1@,INDI,
-1 NAME Angelina /Zaccaria/
-1,NAME,Angelina /Zaccaria/,
-2 GIVN Angelina
-2,GIVN,Angelina,
-2 SURN Zaccaria
-2,SURN,Zaccaria,
-2 _MARNM Zaccaria
-2,_MARNM,Zaccaria,
-1 SEX F
-1,SEX,F,
-1 BIRT
-1,BIRT,
-hello
-2 DATE 11 AUG 1999
-2,DATE,11 AUG 1999,hi
-date
-1 FAMC @F1@
-1,FAMC,@F1@,
-0 @I2@ INDI
-0,@I2@,INDI,
-1 NAME John /Zaccaria/
-1,NAME,John /Zaccaria/,
-2 GIVN John
-2,GIVN,John,
-2 SURN Zaccaria
-2,SURN,Zaccaria,
-2 _MARNM Zaccaria
-2,_MARNM,Zaccaria,
-1 SEX M
-1,SEX,M,
-1 BIRT
-1,BIRT,
-2 DATE 6 OCT 1954
-2,DATE,6 OCT 1954,
-1 FAMS @F1@
-1,FAMS,@F1@,
-1 FAMC @F2@
-1,FAMC,@F2@,
-0 @I3@ INDI
-0,@I3@,INDI,
-1 NAME Karen /Celeste/
-1,NAME,Karen /Celeste/,
-2 GIVN Karen
-2,GIVN,Karen,
-2 SURN Celeste
-2,SURN,Celeste,
-2 _MARNM Zaccaria
-2,_MARNM,Zaccaria,
-1 SEX F
-1,SEX,F,
-1 BIRT
-1,BIRT,
-hello
-2 DATE 19 JUL 1957
-2,DATE,19 JUL 1957,hi
-date
-1 FAMS @F1@
-1,FAMS,@F1@,
-1 FAMC @F3@
-1,FAMC,@F3@,
-0 @I4@ INDI
-0,@I4@,INDI,
-1 NAME Nicholas /Celeste/
-1,NAME,Nicholas /Celeste/,
-2 GIVN Nicholas
-2,GIVN,Nicholas,
-2 SURN Celeste
-2,SURN,Celeste,
-2 _MARNM Celeste
-2,_MARNM,Celeste,
-1 SEX M
-1,SEX,M,
-1 BIRT
-1,BIRT,
-2 DATE 4 JAN 1937
-2,DATE,4 JAN 1937,
-1 FAMS @F3@
-1,FAMS,@F3@,
-0 @I5@ INDI
-0,@I5@,INDI,
-1 NAME Marie /Quagliana/
-1,NAME,Marie /Quagliana/,
-2 GIVN Marie
-2,GIVN,Marie,
-2 SURN Quagliana
-2,SURN,Quagliana,
-2 _MARNM Celeste
-2,_MARNM,Celeste,
-1 SEX F
-1,SEX,F,
-1 BIRT
-1,BIRT,
-hello
-2 DATE 28 JUN 1938
-2,DATE,28 JUN 1938,hi
-date
-1 DEAT Y
-1,DEAT,Y,
-2 DATE 7 JUL 2012
-2,DATE,7 JUL 2012,
-1 FAMS @F3@
-1,FAMS,@F3@,
-0 @I6@ INDI
-0,@I6@,INDI,
-1 NAME Angelo /Zaccaria/
-1,NAME,Angelo /Zaccaria/,
-2 GIVN Angelo
-2,GIVN,Angelo,
-2 SURN Zaccaria
-2,SURN,Zaccaria,
-2 _MARNM Zaccaria
-2,_MARNM,Zaccaria,
-1 SEX M
-1,SEX,M,
-1 BIRT
-1,BIRT,
-2 DATE 9 MAR 1920
-2,DATE,9 MAR 1920,
-1 DEAT Y
-1,DEAT,Y,
-2 DATE 11 APR 1980
-2,DATE,11 APR 1980,
-1 FAMS @F2@
-1,FAMS,@F2@,
-0 @I7@ INDI
-0,@I7@,INDI,
-1 NAME Grace /Ialacci/
-1,NAME,Grace /Ialacci/,
-2 GIVN Grace
-2,GIVN,Grace,
-2 SURN Ialacci
-2,SURN,Ialacci,
-2 _MARNM Zaccaria
-2,_MARNM,Zaccaria,
-1 SEX F
-1,SEX,F,
-1 BIRT
-1,BIRT,
-hello
-2 DATE 14 FEB 1922
-2,DATE,14 FEB 1922,hi
-date
-1 DEAT Y
-1,DEAT,Y,
-2 DATE 6 MAY 2013
-2,DATE,6 MAY 2013,
-1 FAMS @F2@
-1,FAMS,@F2@,
-0 @I8@ INDI
-0,@I8@,INDI,
-1 NAME Frank /Zaccaria/
-1,NAME,Frank /Zaccaria/,
-2 GIVN Frank
-2,GIVN,Frank,
-2 SURN Zaccaria
-2,SURN,Zaccaria,
-2 _MARNM Zaccaria
-2,_MARNM,Zaccaria,
-1 SEX M
-1,SEX,M,
-1 BIRT
-1,BIRT,
-2 DATE 20 OCT 1950
-2,DATE,20 OCT 1950,
-1 FAMS @F4@
-1,FAMS,@F4@,
-1 FAMS @F5@
-1,FAMS,@F5@,
-1 FAMC @F2@
-1,FAMC,@F2@,
-0 @I9@ INDI
-0,@I9@,INDI,
-1 NAME Marian /Smith/
-1,NAME,Marian /Smith/,
-2 GIVN Marian
-2,GIVN,Marian,
-2 SURN Smith
-2,SURN,Smith,
-2 _MARNM Smith
-2,_MARNM,Smith,
-1 SEX F
-1,SEX,F,
-1 BIRT
-1,BIRT,
-hello
-2 DATE 11 AUG 1955
-2,DATE,11 AUG 1955,hi
-date
-1 FAMS @F5@
-1,FAMS,@F5@,
-0 @I10@ INDI
-0,@I10@,INDI,
-1 NAME David /Zaccaria/
-1,NAME,David /Zaccaria/,
-2 GIVN David
-2,GIVN,David,
-2 SURN Zaccaria
-2,SURN,Zaccaria,
-2 _MARNM Zaccaria
-2,_MARNM,Zaccaria,
-1 SEX M
-1,SEX,M,
-1 BIRT
-1,BIRT,
-2 DATE 13 JUN 1979
-2,DATE,13 JUN 1979,
-1 FAMC @F5@
-1,FAMC,@F5@,
-0 @I11@ INDI
-0,@I11@,INDI,
-1 NAME Marcina /Zaccaria/
-1,NAME,Marcina /Zaccaria/,
-2 GIVN Marcina
-2,GIVN,Marcina,
-2 SURN Zaccaria
-2,SURN,Zaccaria,
-2 _MARNM Morgenstern
-2,_MARNM,Morgenstern,
-1 SEX F
-1,SEX,F,
-1 BIRT
-1,BIRT,
-hello
-2 DATE 19 DEC 1981
-2,DATE,19 DEC 1981,hi
-date
-1 FAMC @F5@
-1,FAMC,@F5@,
-0 @I12@ INDI
-0,@I12@,INDI,
-1 NAME Connie /Verranio/
-1,NAME,Connie /Verranio/,
-2 GIVN Connie
-2,GIVN,Connie,
-2 SURN Verranio
-2,SURN,Verranio,
-2 _MARNM Zaccaria
-2,_MARNM,Zaccaria,
-1 SEX F
-1,SEX,F,
-1 BIRT
-1,BIRT,
-2 DATE 14 OCT 1956
-2,DATE,14 OCT 1956,
-1 DEAT Y
-1,DEAT,Y,
-2 DATE 15 MAR 2012
-2,DATE,15 MAR 2012,
-1 FAMS @F4@
-1,FAMS,@F4@,
-1 FAMS @F6@
-1,FAMS,@F6@,
-0 @I13@ INDI
-0,@I13@,INDI,
-1 NAME Jerry /Tyther/
-1,NAME,Jerry /Tyther/,
-2 GIVN Jerry
-2,GIVN,Jerry,
-2 SURN Tyther
-2,SURN,Tyther,
-2 _MARNM Tyther
-2,_MARNM,Tyther,
-1 SEX M
-1,SEX,M,
-1 BIRT
-1,BIRT,
-hello
-2 DATE 20 SEP 1955
-2,DATE,20 SEP 1955,hi
-date
-1 DEAT Y
-1,DEAT,Y,
-2 DATE 15 DEC 2000
-2,DATE,15 DEC 2000,
-1 FAMS @F6@
-1,FAMS,@F6@,
-0 @I14@ INDI
-0,@I14@,INDI,
-1 NAME Michelle /Tyther/
-1,NAME,Michelle /Tyther/,
-2 GIVN Michelle
-2,GIVN,Michelle,
-2 SURN Tyther
-2,SURN,Tyther,
-2 _MARNM Parks
-2,_MARNM,Parks,
-1 SEX F
-1,SEX,F,
-1 BIRT
-1,BIRT,
-2 DATE 20 NOV 1978
-2,DATE,20 NOV 1978,
-1 FAMC @F6@
-1,FAMC,@F6@,
-0 @I15@ INDI
-0,@I15@,INDI,
-1 NAME Jeff /Tyther/
-1,NAME,Jeff /Tyther/,
-2 GIVN Jeff
-2,GIVN,Jeff,
-2 SURN Tyther
-2,SURN,Tyther,
-2 _MARNM Tyther
-2,_MARNM,Tyther,
-1 SEX M
-1,SEX,M,
-1 BIRT
-1,BIRT,
-hello
-2 DATE 15 OCT 1977
-2,DATE,15 OCT 1977,hi
-date
-1 FAMC @F6@
-1,FAMC,@F6@,
-0 @I16@ INDI
-0,@I16@,INDI,
-1 NAME Nicholas /Celeste/
-1,NAME,Nicholas /Celeste/,
-2 GIVN Nicholas
-2,GIVN,Nicholas,
-2 SURN Celeste
-2,SURN,Celeste,
-2 _MARNM Celeste
-2,_MARNM,Celeste,
-1 SEX M
-1,SEX,M,
-1 BIRT
-1,BIRT,
-2 DATE 5 AUG 1959
-2,DATE,5 AUG 1959,
-1 FAMS @F7@
-1,FAMS,@F7@,
-1 FAMS @F8@
-1,FAMS,@F8@,
-1 FAMC @F3@
-1,FAMC,@F3@,
-0 @I17@ INDI
-0,@I17@,INDI,
-1 NAME Jane /Doe/
-1,NAME,Jane /Doe/,
-2 GIVN Jane
-2,GIVN,Jane,
-2 SURN Doe
-2,SURN,Doe,
-2 _MARNM Celeste
-2,_MARNM,Celeste,
-1 SEX F
-1,SEX,F,
-1 BIRT
-1,BIRT,
-hello
-2 DATE 1 JAN 1961
-2,DATE,1 JAN 1961,hi
-date
-1 DEAT Y
-1,DEAT,Y,
-2 DATE 17 JUN 1990
-2,DATE,17 JUN 1990,
-1 FAMS @F8@
-1,FAMS,@F8@,
-0 @I18@ INDI
-0,@I18@,INDI,
-1 NAME Lisa /Frock/
-1,NAME,Lisa /Frock/,
-2 GIVN Lisa
-2,GIVN,Lisa,
-2 SURN Frock
-2,SURN,Frock,
-2 _MARNM Celeste
-2,_MARNM,Celeste,
-1 SEX F
-1,SEX,F,
-1 BIRT
-1,BIRT,
-2 DATE 12 SEP 1962
-2,DATE,12 SEP 1962,
-1 FAMS @F7@
-1,FAMS,@F7@,
-0 @F1@ FAM
-0,@F1@,FAM,
-1 HUSB @I6@
-1,HUSB,@I6@,
-1 WIFE @I7@
-1,WIFE,@I7@,
-1 CHIL @I2@
-1,CHIL,@I2@,
-1 CHIL @I8@
-1,CHIL,@I8@,
-1 MARR
-1,MARR,
-2 DATE 11 AUG 1940
-2,DATE,11 AUG 1940,
-2 PLAC Vasto, Italy
-2,PLAC,Vasto, Italy,
-1 _CURRENT Y
-1,_CURRENT,Y,
-0 @F3@ FAM
-0,@F3@,FAM,
-1 HUSB @I8@
-1,HUSB,@I8@,
-1 WIFE @I12@
-1,WIFE,@I12@,
-1 MARR
-1,MARR,
-2 DATE 17 NOV 1995
-2,DATE,17 NOV 1995,
-2 PLAC Jersey City, NJ
-2,PLAC,Jersey City, NJ,
-1 _CURRENT Y
-1,_CURRENT,Y,
-0 @F5@ FAM
-0,@F5@,FAM,
-1 HUSB @I13@
-1,HUSB,@I13@,
-1 WIFE @I12@
-1,WIFE,@I12@,
-1 CHIL @I14@
-1,CHIL,@I14@,
-1 CHIL @I15@
-1,CHIL,@I15@,
-1 MARR
-1,MARR,
-2 DATE 17 OCT 1975
-2,DATE,17 OCT 1975,
-2 PLAC Union City, NJ
-2,PLAC,Union City, NJ,
-1 DIV
-1,DIV,
-2 DATE 16 FEB 1980
-2,DATE,16 FEB 1980,
-1 _CURRENT N
-1,_CURRENT,N,
-0 @F7@ FAM
-0,@F7@,FAM,
-1 HUSB @I16@
-1,HUSB,@I16@,
-1 WIFE @I17@
-1,WIFE,@I17@,
-1 MARR
-1,MARR,
-2 DATE 13 DEC 1986
-2,DATE,13 DEC 1986,
-2 PLAC Pompton Lakes, NJ
-2,PLAC,Pompton Lakes, NJ,
-1 EVEN
-1,EVEN,
-2 TYPE Ending
-2,TYPE,Ending,
-1 _CURRENT N
-1,_CURRENT,N,
-0 TRLR
-0,TRLR,
-@I11@ Marcina /Zaccaria/ F Marcina /Zaccaria/ null @F5@ null 
-@I11@ Marcina /Zaccaria/ F Marcina /Zaccaria/ null @F5@ null 
-@I13@ Jerry /Tyther/ M Jerry /Tyther/ null null @F6@ 
-@I13@ Jerry /Tyther/ M Jerry /Tyther/ null null @F6@ 
-@I15@ Jeff /Tyther/ M Jeff /Tyther/ null @F6@ null 
-@I15@ Jeff /Tyther/ M Jeff /Tyther/ null @F6@ null 
-@I17@ Jane /Doe/ F Jane /Doe/ null null @F8@ 
-@I17@ Jane /Doe/ F Jane /Doe/ null null @F8@ 
-@I1@ Angelina /Zaccaria/ F Angelina /Zaccaria/ null @F1@ null 
-@I1@ Angelina /Zaccaria/ F Angelina /Zaccaria/ null @F1@ null 
-@I3@ Karen /Celeste/ F Karen /Celeste/ null @F3@ @F1@ 
-@I3@ Karen /Celeste/ F Karen /Celeste/ null @F3@ @F1@ 
-@I5@ Marie /Quagliana/ F Marie /Quagliana/ null null @F3@ 
-@I5@ Marie /Quagliana/ F Marie /Quagliana/ null null @F3@ 
-@I7@ Grace /Ialacci/ F Grace /Ialacci/ null null @F2@ 
-@I7@ Grace /Ialacci/ F Grace /Ialacci/ null null @F2@ 
-@I9@ Marian /Smith/ F Marian /Smith/ null null @F5@ 
-@I9@ Marian /Smith/ F Marian /Smith/ null null @F5@ 
+indiv id	name	gender	birth date	death date	FAMC	FAMS
+@I10@	David /Zaccaria/	M	13 JUN 1979	null	@F5@	null
+@I10@	David /Zaccaria/	M	13 JUN 1979	null	@F5@	null
+@I11@	Marcina /Zaccaria/	F	19 DEC 1981	null	@F5@	null
+@I11@	Marcina /Zaccaria/	F	19 DEC 1981	null	@F5@	null
+@I12@	Connie /Verranio/	F	14 OCT 1956	15 MAR 2012	null	@F6@
+@I12@	Connie /Verranio/	F	14 OCT 1956	15 MAR 2012	null	@F6@
+@I13@	Jerry /Tyther/	M	20 SEP 1955	15 DEC 2000	null	@F6@
+@I13@	Jerry /Tyther/	M	20 SEP 1955	15 DEC 2000	null	@F6@
+@I14@	Michelle /Tyther/	F	20 NOV 1978	null	@F6@	null
+@I14@	Michelle /Tyther/	F	20 NOV 1978	null	@F6@	null
+@I15@	Jeff /Tyther/	M	15 OCT 1977	null	@F6@	null
+@I15@	Jeff /Tyther/	M	15 OCT 1977	null	@F6@	null
+@I16@	Nicholas /Celeste/	M	5 AUG 1959	null	@F3@	@F8@
+@I16@	Nicholas /Celeste/	M	5 AUG 1959	null	@F3@	@F8@
+@I17@	Jane /Doe/	F	1 JAN 1961	17 JUN 1990	null	@F8@
+@I17@	Jane /Doe/	F	1 JAN 1961	17 JUN 1990	null	@F8@
+@I18@	Lisa /Frock/	F	12 SEP 1962	null	null	@F7@
+@I18@	Lisa /Frock/	F	12 SEP 1962	null	null	@F7@
+@I1@	Angelina /Zaccaria/	F	11 AUG 1999	null	@F1@	null
+@I1@	Angelina /Zaccaria/	F	11 AUG 1999	null	@F1@	null
+@I2@	John /Zaccaria/	M	6 OCT 1954	null	@F2@	@F1@
+@I2@	John /Zaccaria/	M	6 OCT 1954	null	@F2@	@F1@
+@I3@	Karen /Celeste/	F	19 JUL 1957	null	@F3@	@F1@
+@I3@	Karen /Celeste/	F	19 JUL 1957	null	@F3@	@F1@
+@I4@	Nicholas /Celeste/	M	4 JAN 1937	null	null	@F3@
+@I4@	Nicholas /Celeste/	M	4 JAN 1937	null	null	@F3@
+@I5@	Marie /Quagliana/	F	28 JUN 1938	7 JUL 2012	null	@F3@
+@I5@	Marie /Quagliana/	F	28 JUN 1938	7 JUL 2012	null	@F3@
+@I6@	Angelo /Zaccaria/	M	9 MAR 1920	11 APR 1980	null	@F2@
+@I6@	Angelo /Zaccaria/	M	9 MAR 1920	11 APR 1980	null	@F2@
+@I7@	Grace /Ialacci/	F	14 FEB 1922	6 MAY 2013	null	@F2@
+@I7@	Grace /Ialacci/	F	14 FEB 1922	6 MAY 2013	null	@F2@
+@I8@	Frank /Zaccaria/	M	20 OCT 1950	null	@F2@	@F5@
+@I8@	Frank /Zaccaria/	M	20 OCT 1950	null	@F2@	@F5@
+@I9@	Marian /Smith/	F	11 AUG 1955	null	null	@F5@
+@I9@	Marian /Smith/	F	11 AUG 1955	null	null	@F5@
 
-@F1@ 24 MAY 1997 false @I2@ null @I3@ null [@I1@] 
-@F1@ 24 MAY 1997 false @I2@ null @I3@ null [@I1@] 
-@F3@ null false @I4@ null @I5@ null [@I3@, @I16@] 
-@F3@ null false @I4@ null @I5@ null [@I3@, @I16@] 
-@F5@ 14 OCT 1977 true @I8@ null @I9@ null [@I10@, @I11@] 
-@F5@ 14 OCT 1977 true @I8@ null @I9@ null [@I10@, @I11@] 
-@F7@ 13 NOV 1995 false @I16@ null @I18@ null [] 
-@F7@ 13 NOV 1995 false @I16@ null @I18@ null [] 
+fam id	marriage date	divorced?	husband id	husband name	wife id	wife name	children ids
+@F1@	24 MAY 1997	false	@I2@	John /Zaccaria/	@I3@	Karen /Celeste/	[@I1@]
+@F1@	24 MAY 1997	false	@I2@	John /Zaccaria/	@I3@	Karen /Celeste/	[@I1@]
+@F2@	11 AUG 1940	false	@I6@	Angelo /Zaccaria/	@I7@	Grace /Ialacci/	[@I2@, @I8@]
+@F2@	11 AUG 1940	false	@I6@	Angelo /Zaccaria/	@I7@	Grace /Ialacci/	[@I2@, @I8@]
+@F3@	1 JUN 1955	false	@I4@	Nicholas /Celeste/	@I5@	Marie /Quagliana/	[@I3@, @I16@]
+@F3@	1 JUN 1955	false	@I4@	Nicholas /Celeste/	@I5@	Marie /Quagliana/	[@I3@, @I16@]
+@F4@	17 NOV 1995	false	@I8@	Frank /Zaccaria/	@I12@	Connie /Verranio/	[]
+@F4@	17 NOV 1995	false	@I8@	Frank /Zaccaria/	@I12@	Connie /Verranio/	[]
+@F5@	14 OCT 1977	true	@I8@	Frank /Zaccaria/	@I9@	Marian /Smith/	[@I10@, @I11@]
+@F5@	14 OCT 1977	true	@I8@	Frank /Zaccaria/	@I9@	Marian /Smith/	[@I10@, @I11@]
+@F6@	17 OCT 1975	true	@I13@	Jerry /Tyther/	@I12@	Connie /Verranio/	[@I14@, @I15@]
+@F6@	17 OCT 1975	true	@I13@	Jerry /Tyther/	@I12@	Connie /Verranio/	[@I14@, @I15@]
+@F7@	13 NOV 1995	false	@I16@	Nicholas /Celeste/	@I18@	Lisa /Frock/	[]
+@F7@	13 NOV 1995	false	@I16@	Nicholas /Celeste/	@I18@	Lisa /Frock/	[]
+@F8@	13 DEC 1986	false	@I16@	Nicholas /Celeste/	@I17@	Jane /Doe/	[]
+@F8@	13 DEC 1986	false	@I16@	Nicholas /Celeste/	@I17@	Jane /Doe/	[]
 
