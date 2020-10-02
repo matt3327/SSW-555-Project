@@ -13,9 +13,11 @@ class Individual:
     self.deathDate = ""
     self.childId = ""
     self.spouseId = ""
+    self.errors = []
+    self.anomalies = []
 
   def totalList(self):
-    return [self.Id,self.name,self.gender,self.birthDate,self.age,self.alive,self.deathDate,self.childId if len(self.childId) != 0 else "NA",self.spouseId]
+    return [self.Id,self.name,self.gender,self.birthDate,self.age,self.alive,self.deathDate,self.childId if len(self.childId) != 0 else "N/A",self.spouseId,self.errors if len(self.errors) != 0 else "",self.anomalies if len(self.anomalies) != 0 else ""]
 
 class Family:
   def __init__(self, Id):
@@ -27,24 +29,26 @@ class Family:
     self.wifeId = ""
     self.wifeName = ""
     self.children = []
+    self.errors = []
+    self.anomalies = []
 
   def addChild(self,childId):
     self.children.append(childId)
     
   def totalList(self):
-    return [self.Id,self.married,self.divorced,self.husbandId,self.husbName,self.wifeId,self.wifeName,self.children if len(self.children) != 0 else "NA"]
+    return [self.Id,self.married,self.divorced,self.husbandId,self.husbName,self.wifeId,self.wifeName,self.children if len(self.children) != 0 else "N/A",self.errors if len(self.errors) != 0 else "",self.anomalies if len(self.anomalies) != 0 else ""]
     
-def call_individual(individual):
+def print_individuals_table(individual):
   Prettable = PrettyTable()
-  Prettable.field_names = ["ID","Name","Gender","BirthDate","Age","Alive","DeathDate","ChildId","SpouseId"]
+  Prettable.field_names = ["ID","Name","Gender","BirthDate","Age","Alive","DeathDate","ChildId","SpouseId","Errors","Anomalies"]
   for i in individual:
     Prettable.add_row(i.totalList())
   print("Individual")
   print(Prettable)
   
-def call_family(family):
+def print_families_table(family):
   Prettable = PrettyTable()
-  Prettable.field_names = ["ID","Married","Divorced","Husband ID","Husband Name","Wife ID","Wife Name","Child ID"]
+  Prettable.field_names = ["ID","Married","Divorced","Husband ID","Husband Name","Wife ID","Wife Name","Child ID","Errors","Anomalies"]
   for f in family:
     Prettable.add_row(f.totalList())
   print("Family")
@@ -58,7 +62,7 @@ Gedcomm_File = open("Zaccaria.ged", "r")
 individual = []
 family = []
 
-def finditems(Gedcomm_File): 
+def populate_gedcom_data(Gedcomm_File): 
   findinglabels = False
   Indiv = False
   lookingDivorce = False
@@ -140,7 +144,7 @@ def finditems(Gedcomm_File):
           pass
       
 
-finditems(Gedcomm_File)
-call_individual(individual)
+populate_gedcom_data(Gedcomm_File)
+print_individuals_table(individual)
 print('\n')
-call_family(family)
+print_families_table(family)
