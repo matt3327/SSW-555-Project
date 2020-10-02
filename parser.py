@@ -153,6 +153,46 @@ def populate_gedcom_data(Gedcom_File):
           pass
 
 
+# # errors
+# def check_date_before_today_error(date)
+
+# def check_spouse_birth_before_marriage_error(birth_date,marriage_date)
+
+# def check_birth_before_death_error(birth_date,death_date)
+
+# def check_marriage_before_spouse_death_error(marriage_date,death_date)
+
+# def check_marriage_before_divorce_error(marriage_date,divorce_date)
+
+# def check_divorce_before_spouse_death_error(divorce_date,death_date)
+
+# def check_age_less_than_150_error(age)
+
+# #before death of mother, before 9 months after death of father
+# def check_child_birth_before_parents_death_error(child_birth_date,mother_death_date,father_death_date)
+
+
+# # anomalies
+# def check_child_birth_before_marriage(child_birth_date,marriage_date)
+
+# def check_marriage_after_14(wife_birth_date,husband_birth_date,marriage_date)
+
+# #need to make spouse family id an array, discuss args
+# def check_no_bigamy()
+
+# # individual errors and anomalies
+# def check_individual_for_errors()
+
+# def check_individual_for_anomalies()
+
+
+# # family errors and anomalies
+# def check_family_for_errors(family):
+#   check_date_before_today_error()
+
+# def check_family_for_anomalies(family)
+
+
 populate_gedcom_data(Gedcom_File)
 print_individuals_table(individual)
 print('\n')
