@@ -1,6 +1,7 @@
 from prettytable import PrettyTable
 from datetime import datetime
 import importlib
+import sys
 
 class Individual:
   def __init__(self, Id):
@@ -64,7 +65,7 @@ def print_families_table(family):
 
 labels = ["INDI","NAME","SEX","BIRT","DEAT","FAMC","FAMS","FAM","MARR","HUSB","WIFE","CHIL","DIV","DATE","HEAD","TRLR","NOTE"]
 
-Gedcom_File = open("Zaccaria.ged", "r") 
+Gedcom_File = open(sys.argv[1], "r") 
 
 individual = []
 family = []

@@ -12,5 +12,5 @@ pip install PrettyTable
 
 To run new Python version:
 ```console
-python3 -u "parser.py"
+python3 -u "parser.py" "Zaccaria.ged"
 ```
