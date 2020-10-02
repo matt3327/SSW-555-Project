@@ -1,7 +1,16 @@
 # SSW-555-Project
 
-To run:
+install PrettyTable (for Mac): 
 ```console
-javac GedcomParser.java
-java GedcomParser test-gedcom-files/Zaccaria.ged > out.txt
+pip3 install PrettyTable
+```
+
+install PrettyTable (for Windows): 
+```console
+pip install PrettyTable
+```
+
+To run new Python version:
+```console
+python3 -u "parser.py"
 ```
