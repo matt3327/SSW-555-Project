@@ -168,18 +168,16 @@ def populate_gedcom_data(Gedcom_File):
 # def check_birth_before_death_error(birth_date,death_date)
 
 #Angie-US04
-def check_marriage_before_spouse_death_error(fam):
-  husband = get_individual_by_id(fam.husbandId)
-  wife = get_individual_by_id(fam.wifeId)
+def US04_check_marriage_before_spouse_death_error(fam,husband,wife):
   if husband.alive == False:
     if fam.marriageDateObject > husband.deathDateObject:
-      fam.errors.append("Marriage before husband death")
+      fam.errors.append("Marriage date is after husband death date")
   if wife.alive == False:
     if fam.marriageDateObject > wife.deathDateObject:
-      fam.errors.append("Marriage before wife death")
+      fam.errors.append("Marriage date is after wife death date")
 
 #Liv-US05
-def check_marriage_before_divorce_error(fam):
+def US05_check_marriage_before_divorce_error(fam):
   if fam.divorced == True:
     if fam.marriageDateObject > fam.divorceDateObject:
       fam.errors.append("Divorce date is before marriage date")
@@ -204,7 +202,9 @@ def check_marriage_before_divorce_error(fam):
 # family errors and anomalies
 def check_families_for_errors_and_anomalies():
   for fam in family:
-    check_marriage_before_spouse_death_error(fam)
+    husband = get_individual_by_id(fam.husbandId)
+    wife = get_individual_by_id(fam.wifeId)
+    US04_check_marriage_before_spouse_death_error(fam,husband,wife)
     check_marriage_before_divorce_error(fam)
 
 # populate_gedcom_data(Gedcom_File)
