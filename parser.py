@@ -32,6 +32,7 @@ class Family:
     self.marriageDateObject = ""
     self.divorceDateString = ""
     self.divorceDateObject = ""
+    self.divorced = False
     self.husbandId = ""
     self.husbandName = ""
     self.wifeId = ""
@@ -150,9 +151,10 @@ def populate_gedcom_data(Gedcom_File):
           if lookingDivorce:
             family[len(family)-1].divorceDateString = " ".join(linelist[2:])
             family[len(family)-1].divorceDateObject = datetime.strptime(family[len(family)-1].divorceDateString, '%d %b %Y')
+            family[len(family)-1].divorced = True
             lookingDivorce = False
           if label == "DIV":
-            lookingDivorce = True  
+            lookingDivorce = True 
           if label == "CHIL":
             family[len(family)-1].addChild(linelist[2].strip("@"))
             
@@ -165,7 +167,7 @@ def populate_gedcom_data(Gedcom_File):
 
 # def check_birth_before_death_error(birth_date,death_date)
 
-#Angie
+#Angie-US04
 def check_marriage_before_spouse_death_error(fam):
   husband = get_individual_by_id(fam.husbandId)
   wife = get_individual_by_id(fam.wifeId)
@@ -176,8 +178,11 @@ def check_marriage_before_spouse_death_error(fam):
     if fam.marriageDateObject > wife.deathDateObject:
       fam.errors.append("Marriage before wife death")
 
-#Liv
-# def check_marriage_before_divorce_error(marriage_date,divorce_date)
+#Liv-US05
+def check_marriage_before_divorce_error(fam):
+  if fam.divorced == True:
+    if fam.marriageDateObject > fam.divorceDateObject:
+      fam.errors.append("Divorce date is before marriage date")
 
 # def check_divorce_before_spouse_death_error(divorce_date,death_date)
 
