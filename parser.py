@@ -161,7 +161,22 @@ def populate_gedcom_data(Gedcom_File):
         except:
           pass
 
-# def US01_check_date_before_today_error(dateObject):
+def US01_check_date_before_today_error(indiv_or_fam,identifier):
+  if identifier == "Birth":
+    dateObject = indiv_or_fam.birthDateObject
+  elif identifier == "Death":
+    dateObject = indiv_or_fam.deathDateObject
+  elif identifier == "Marriage":
+    dateObject = indiv_or_fam.marriageDateObject
+  elif identifier == "Divorce":
+    dateObject = indiv_or_fam.divorceDateObject
+  if datetime.now() < dateObject:
+      indiv_or_fam.errors.append(identifier + " date is after current date")
+
+# birth/death dates for individual
+# marriage/divorce dates for families
+
+
 
 # def US02_check_spouse_birth_before_marriage_error(fam,husband,wife):
 
@@ -186,10 +201,10 @@ def US05_check_marriage_before_divorce_error(fam):
 
 # def US07_check_age_less_than_150_error(indiv):
 
-# #before death of mother, before 9 months after death of father
-# def US08_check_child_birth_before_parents_death_error(fam,husband,wife,child):
-
-# def US09_check_child_birth_before_marriage_anomaly(fam,child):
+def US08_check_child_birth_before_marriage_anomaly(fam,children):
+  for child in children:
+    if fam.marriageDateObject > child.birthDateObject:
+      fam.errors.append("Child born before marriage of parents")
 
 # def US10_check_marriage_after_14_anomaly(fam,husband,wife):
 
@@ -198,11 +213,11 @@ def US05_check_marriage_before_divorce_error(fam):
 # need to add a US12
 
 # individual errors and anomalies
-# def check_individual_for_errors_and_anomalies():
-#   for indiv in individuals:
-    # US01_check_date_before_today_error(indiv.birthDateObject)
-    # if indiv.alive == False:
-    #   US01_check_date_before_today_error(indiv.deathDateObject)
+def check_individuals_for_errors_and_anomalies():
+  for indiv in individuals:
+    US01_check_date_before_today_error(indiv,"Birth")
+    if indiv.alive == False:
+      US01_check_date_before_today_error(indiv,"Death")
     # US03_check_birth_before_death_error(indiv)
     
 # family errors and anomalies
@@ -210,12 +225,16 @@ def check_families_for_errors_and_anomalies():
   for fam in families:
     husband = get_individual_by_id(fam.husbandId)
     wife = get_individual_by_id(fam.wifeId)
-    # US01_check_date_before_today_error(fam.marriageDateObject)
-    # if fam.divorced == True:
-    #   US01_check_date_before_today_error(fam.divorceDateObject)
+    children = []
+    for child in fam.children:
+      children.append(get_individual_by_id(child))
+    US01_check_date_before_today_error(fam,"Marriage")
+    if fam.divorced == True:
+      US01_check_date_before_today_error(fam,"Divorce")
     # US02_check_spouse_birth_before_marriage_error(fam,husband,wife)
     US04_check_marriage_before_spouse_death_error(fam,husband,wife)
     US05_check_marriage_before_divorce_error(fam)
+    US08_check_child_birth_before_marriage_anomaly(fam, children)
 
 # populate_gedcom_data(Gedcom_File)
 # check_families_for_errors_and_anomalies()
@@ -227,6 +246,7 @@ if __name__ == "__main__":
     Gedcom_File = open(sys.argv[1], "r") 
 
     populate_gedcom_data(Gedcom_File)
+    check_individuals_for_errors_and_anomalies()
     check_families_for_errors_and_anomalies()
     print_individuals_table()
     print('\n')
