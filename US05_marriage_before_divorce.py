@@ -2,7 +2,7 @@ import unittest
 import parser
 from datetime import datetime
 from parser import Family
-from parser import check_marriage_before_divorce_error
+from parser import US05_check_marriage_before_divorce_error
 
 
 
@@ -15,7 +15,7 @@ class Test(unittest.TestCase):
         testFam1.divorced = True
         testFam1.marriageDateObject = datetime(2019, 5, 3)
         testFam1.divorceDateObject = datetime(2018, 5, 3)
-        check_marriage_before_divorce_error(testFam1)
+        US05_check_marriage_before_divorce_error(testFam1)
         self.assertEqual(len(testFam1.errors), 1)
         self.assertEqual(testFam1.errors[0], "Divorce date is before marriage date")
     
@@ -24,7 +24,7 @@ class Test(unittest.TestCase):
         testFam2.divorced = True
         testFam2.marriageDateObject = datetime(2018, 5, 3)
         testFam2.divorceDateObject = datetime(2019, 5, 3)
-        check_marriage_before_divorce_error(testFam2)
+        US05_check_marriage_before_divorce_error(testFam2)
         self.assertEqual(len(testFam2.errors), 0)
         self.assertEqual(testFam2.errors, [])
 
@@ -32,7 +32,7 @@ class Test(unittest.TestCase):
         testFam3 = Family("F1")
         testFam3.divorced = False
         testFam3.marriageDateObject = datetime(2018, 5, 3)
-        check_marriage_before_divorce_error(testFam3)
+        US05_check_marriage_before_divorce_error(testFam3)
         self.assertEqual(len(testFam3.errors), 0)
         self.assertEqual(testFam3.errors, [])
 
