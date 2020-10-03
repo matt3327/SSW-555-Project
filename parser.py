@@ -51,7 +51,7 @@ def print_individuals_table(individual):
   Prettable.field_names = ["ID","Name","Gender","Birth Date","Age","Alive","Death Date","Child Family","Spouse Families","Errors","Anomalies"]
   for i in individual:
     Prettable.add_row(i.totalList())
-  print("Individual")
+  print("Individuals")
   print(Prettable)
   
 def print_families_table(family):
@@ -59,7 +59,7 @@ def print_families_table(family):
   Prettable.field_names = ["ID","Marriage Date","Divorce Date","Husband ID","Husband Name","Wife ID","Wife Name","Child IDs","Errors","Anomalies"]
   for f in family:
     Prettable.add_row(f.totalList())
-  print("Family")
+  print("Families")
   print(Prettable)
 
 
@@ -69,6 +69,11 @@ Gedcom_File = open(sys.argv[1], "r")
 
 individual = []
 family = []
+
+def get_individual_by_id(individualId):
+  for i in individual:
+    if i.Id == individualId:
+      return i
 
 def populate_gedcom_data(Gedcom_File): 
   findinglabels = False
@@ -116,6 +121,7 @@ def populate_gedcom_data(Gedcom_File):
           if lookingDeath:
             individual[len(individual)-1].deathDateString = " ".join(linelist[2:])
             deathDate_object = datetime.strptime(individual[len(individual)-1].deathDateString, '%d %b %Y')
+            individual[len(individual)-1].deathDateObject = deathDate_object
             individual[len(individual)-1].age = str((deathDate_object - individual[len(individual)-1].birthDateObject)/365).split(" ")[0]
             individual[len(individual)-1].alive = False
             lookingDeath = False
@@ -153,16 +159,24 @@ def populate_gedcom_data(Gedcom_File):
         except:
           pass
 
-
-# # errors
 # def check_date_before_today_error(date)
 
 # def check_spouse_birth_before_marriage_error(birth_date,marriage_date)
 
 # def check_birth_before_death_error(birth_date,death_date)
 
-# def check_marriage_before_spouse_death_error(marriage_date,death_date)
+#Angie
+def check_marriage_before_spouse_death_error(fam):
+  husband = get_individual_by_id(fam.husbandId)
+  wife = get_individual_by_id(fam.wifeId)
+  if husband.alive == False:
+    if fam.marriageDateObject > husband.deathDateObject:
+      fam.errors.append("Marriage before husband death")
+  if wife.alive == False:
+    if fam.marriageDateObject > wife.deathDateObject:
+      fam.errors.append("Marriage before wife death")
 
+#Liv
 # def check_marriage_before_divorce_error(marriage_date,divorce_date)
 
 # def check_divorce_before_spouse_death_error(divorce_date,death_date)
@@ -172,29 +186,23 @@ def populate_gedcom_data(Gedcom_File):
 # #before death of mother, before 9 months after death of father
 # def check_child_birth_before_parents_death_error(child_birth_date,mother_death_date,father_death_date)
 
+# def check_child_birth_before_marriage_anomaly(child_birth_date,marriage_date)
 
-# # anomalies
-# def check_child_birth_before_marriage(child_birth_date,marriage_date)
-
-# def check_marriage_after_14(wife_birth_date,husband_birth_date,marriage_date)
+# def check_marriage_after_14_anomaly(wife_birth_date,husband_birth_date,marriage_date)
 
 # #need to make spouse family id an array, discuss args
-# def check_no_bigamy()
+# def check_no_bigamy_anomaly()
 
 # # individual errors and anomalies
-# def check_individual_for_errors()
+# def check_individual_for_errors_and_anomalies()
 
-# def check_individual_for_anomalies()
-
-
-# # family errors and anomalies
-# def check_family_for_errors(family):
-#   check_date_before_today_error()
-
-# def check_family_for_anomalies(family)
-
+# family errors and anomalies
+def check_families_for_errors_and_anomalies():
+  for fam in family:
+    check_marriage_before_spouse_death_error(fam)
 
 populate_gedcom_data(Gedcom_File)
+check_families_for_errors_and_anomalies()
 print_individuals_table(individual)
 print('\n')
 print_families_table(family)
