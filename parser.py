@@ -191,9 +191,14 @@ def US07_check_age_less_than_150_error(indiv):
 
 
 # #before death of mother, before 9 months after death of father
-# def US08_check_child_birth_before_parents_death_error(fam,husband,wife,child):
 
-# def US09_check_child_birth_before_marriage_anomaly(fam,child):
+#def US08_check_child_birth_before_parents_death_error(fam,husband,wife,child):
+
+#Jenn-US09
+def US09_check_child_birth_before_marriage_anomaly(fam,child):
+  if fam.marriageDateObject > child.birthDateObject: #marriage after birth
+    fam.anomalies.append(child.Id + " born before parents married")
+
 
 # def US10_check_marriage_after_14_anomaly(fam,husband,wife):
 
@@ -215,6 +220,11 @@ def check_families_for_errors_and_anomalies():
   for fam in families:
     husband = get_individual_by_id(fam.husbandId)
     wife = get_individual_by_id(fam.wifeId)
+    for child in fam.children:
+      child = get_individual_by_id(child)
+      US09_check_child_birth_before_marriage_anomaly(fam,child)
+    
+    
     # US01_check_date_before_today_error(fam.marriageDateObject)
     # if fam.divorced == True:
     #   US01_check_date_before_today_error(fam.divorceDateObject)
