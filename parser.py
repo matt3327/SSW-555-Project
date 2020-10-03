@@ -66,7 +66,7 @@ def print_families_table(family):
 
 labels = ["INDI","NAME","SEX","BIRT","DEAT","FAMC","FAMS","FAM","MARR","HUSB","WIFE","CHIL","DIV","DATE","HEAD","TRLR","NOTE"]
 
-Gedcom_File = open(sys.argv[1], "r") 
+# Gedcom_File = open(sys.argv[1], "r") 
 
 individual = []
 family = []
@@ -205,9 +205,19 @@ def check_marriage_before_divorce_error(fam):
 def check_families_for_errors_and_anomalies():
   for fam in family:
     check_marriage_before_spouse_death_error(fam)
+    check_marriage_before_divorce_error(fam)
 
-populate_gedcom_data(Gedcom_File)
-check_families_for_errors_and_anomalies()
-print_individuals_table(individual)
-print('\n')
-print_families_table(family)
+# populate_gedcom_data(Gedcom_File)
+# check_families_for_errors_and_anomalies()
+# print_individuals_table(individual)
+# print('\n')
+# print_families_table(family)
+
+if __name__ == "__main__":
+    Gedcom_File = open(sys.argv[1], "r") 
+
+    populate_gedcom_data(Gedcom_File)
+    check_families_for_errors_and_anomalies()
+    print_individuals_table(individual)
+    print('\n')
+    print_families_table(family)
