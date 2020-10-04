@@ -211,12 +211,12 @@ def US05_check_marriage_before_divorce_error(fam):
 #       fam.errors.append("Child born before marriage of parents")
 
 # #before death of mother, before 9 months after death of father
-# def US09_check_child_birth_before_parents_death_error(fam,husband,wife,children):
-#   for child in children:
-#     if husband.deathDateObject > child.birthDateObject
-#     fam.error.append("Child born after death of husband")
-#     elif wife.deathDateObject > child.birthDateObject
-#     fam.error.append("Child born after death of wife")
+def US08_check_child_birth_before_parents_death_error(fam,husband,wife,child):
+  if husband.deathDateObject < child.birthDateObject:
+    fam.errors.append("Child born after death of husband")
+  if wife.deathDateObject < child.birthDateObject:
+    fam.errors.append("Child born after death of wife")
+
 
 # def US10_check_marriage_after_14_anomaly(fam,husband,wife):
 
