@@ -2,6 +2,7 @@ from prettytable import PrettyTable
 from datetime import datetime
 import importlib
 import sys
+import math
 
 class Individual:
   def __init__(self, Id):
@@ -211,14 +212,25 @@ def US05_check_marriage_before_divorce_error(fam):
 #       fam.errors.append("Child born before marriage of parents")
 
 # #before death of mother, before 9 months after death of father
-def US08_check_child_birth_before_parents_death_error(fam,husband,wife,child):
-  if husband.deathDateObject < child.birthDateObject:
-    fam.errors.append("Child born after death of husband")
-  if wife.deathDateObject < child.birthDateObject:
+def US08_check_child_birth_before_parents_death_error(fam,wife,child):
+  if wife.deathDateObject < child.birthDateObject:  
     fam.errors.append("Child born after death of wife")
 
 
-# def US10_check_marriage_after_14_anomaly(fam,husband,wife):
+def US10_check_marriage_after_14_anomaly(fam,wife,husband):
+  day1 = wife.birthDateObject
+  day2 = fam.marriageDateObject 
+  day3 = (abs((day2 - day1).days)/365)
+  day4 = husband.birthDateObject
+  day5 = fam.marriageDateObject 
+  day6 = (abs((day5 - day4).days)/365)
+  if day3 < 14:
+    fam.errors.append("Wife married before 14 error")
+  if day6 < 14:
+    fam.errors.append("Husband married before 14 error")
+  # if int(wife.birthDateObject) - int(fam.marriageDateObject) > 14 and int(husband.birthDateObject) - int(fam.marriageDateObject) >14:
+  #   fam.errors.append("error marriage before 14")
+
 
 # def US11_check_no_bigamy_anomaly(indiv):
 
@@ -246,8 +258,9 @@ def check_families_for_errors_and_anomalies():
     US02_birth_before_marriage_error(fam,husband,wife)
     US04_check_marriage_before_spouse_death_error(fam,husband,wife)
     US05_check_marriage_before_divorce_error(fam)
-    #US08_check_child_birth_before_marriage_anomaly(fam, children)
-
+    # US08_check_child_birth_before_parents_death_error(fam,wife,child)
+    US10_check_marriage_after_14_anomaly(fam,wife,husband) 
+    
 # populate_gedcom_data(Gedcom_File)
 # check_families_for_errors_and_anomalies()
 # print_individuals_table(individual)
