@@ -179,6 +179,10 @@ def US01_check_date_before_today_error(indiv_or_fam,identifier):
 
 
 # def US02_check_spouse_birth_before_marriage_error(fam,husband,wife):
+def US02_birth_before_marriage_error(fam,husband,wife):
+  if fam.marriageDateObject < husband.birthDateObject or fam.marriageDateObject < wife.birthDateObject:
+    fam.errors.append("Marriage occured before birth date")
+  
 
 # def US03_check_birth_before_death_error(indiv):
 
@@ -201,10 +205,18 @@ def US05_check_marriage_before_divorce_error(fam):
 
 # def US07_check_age_less_than_150_error(indiv):
 
-def US08_check_child_birth_before_marriage_anomaly(fam,children):
-  for child in children:
-    if fam.marriageDateObject > child.birthDateObject:
-      fam.errors.append("Child born before marriage of parents")
+# def US08_check_child_birth_before_marriage_anomaly(fam,children):
+#   for child in children:
+#     if fam.marriageDateObject > child.birthDateObject:
+#       fam.errors.append("Child born before marriage of parents")
+
+# #before death of mother, before 9 months after death of father
+# def US09_check_child_birth_before_parents_death_error(fam,husband,wife,children):
+#   for child in children:
+#     if husband.deathDateObject > child.birthDateObject
+#     fam.error.append("Child born after death of husband")
+#     elif wife.deathDateObject > child.birthDateObject
+#     fam.error.append("Child born after death of wife")
 
 # def US10_check_marriage_after_14_anomaly(fam,husband,wife):
 
@@ -231,10 +243,10 @@ def check_families_for_errors_and_anomalies():
     US01_check_date_before_today_error(fam,"Marriage")
     if fam.divorced == True:
       US01_check_date_before_today_error(fam,"Divorce")
-    # US02_check_spouse_birth_before_marriage_error(fam,husband,wife)
+    US02_birth_before_marriage_error(fam,husband,wife)
     US04_check_marriage_before_spouse_death_error(fam,husband,wife)
     US05_check_marriage_before_divorce_error(fam)
-    US08_check_child_birth_before_marriage_anomaly(fam, children)
+    #US08_check_child_birth_before_marriage_anomaly(fam, children)
 
 # populate_gedcom_data(Gedcom_File)
 # check_families_for_errors_and_anomalies()
