@@ -262,18 +262,19 @@ def check_families_for_errors_and_anomalies():
   for fam in families:
     husband = get_individual_by_id(fam.husbandId)
     wife = get_individual_by_id(fam.wifeId)
-    child = get_individual_by_id(child)
     US01_check_date_before_today_error(fam,"Marriage")
     if fam.divorced == True:
       US01_check_date_before_today_error(fam,"Divorce")
+      US05_check_marriage_before_divorce_error(fam)
+      US06_check_divorce_before_spouse_death_error(fam, husband, wife)
     US02_birth_before_marriage_error(fam,husband,wife)
     US04_check_marriage_before_spouse_death_error(fam,husband,wife)
-    US05_check_marriage_before_divorce_error(fam)
-    US06_check_divorce_before_spouse_death_error(fam, husband, wife)
     US10_check_marriage_after_14_anomaly(fam,wife,husband)
-    for child in fam.children:
-      US08_check_child_birth_before_parents_death_error(fam,wife,child)
+    for child_id in fam.children:
+      child = get_individual_by_id(child_id)
       US09_check_child_birth_before_marriage_anomaly(fam,child)
+      if wife.alive == False:
+        US08_check_child_birth_before_parents_death_error(fam,wife,child)
 
 # populate_gedcom_data(Gedcom_File)
 # check_families_for_errors_and_anomalies()
@@ -286,7 +287,7 @@ if __name__ == "__main__":
     populate_gedcom_data(Gedcom_File)
     check_individuals_for_errors_and_anomalies()
     check_families_for_errors_and_anomalies()
-    check_individual_for_errors_and_anomalies()
+    check_individuals_for_errors_and_anomalies()
     print_individuals_table()
     print('\n')
     print_families_table()
