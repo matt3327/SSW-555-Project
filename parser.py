@@ -66,9 +66,6 @@ def print_families_table():
 
 
 labels = ["INDI","NAME","SEX","BIRT","DEAT","FAMC","FAMS","FAM","MARR","HUSB","WIFE","CHIL","DIV","DATE","HEAD","TRLR","NOTE"]
-
-# Gedcom_File = open(sys.argv[1], "r") 
-
 individuals = []
 families = []
 
@@ -162,6 +159,7 @@ def populate_gedcom_data(Gedcom_File):
         except:
           pass
 
+# Justin
 def US01_check_date_before_today_error(indiv_or_fam,identifier):
   if identifier == "Birth":
     dateObject = indiv_or_fam.birthDateObject
@@ -174,22 +172,17 @@ def US01_check_date_before_today_error(indiv_or_fam,identifier):
   if datetime.now() < dateObject:
       indiv_or_fam.errors.append(identifier + " date is after current date")
 
-# birth/death dates for individual
-# marriage/divorce dates for families
-
-
-
-# def US02_check_spouse_birth_before_marriage_error(fam,husband,wife):
+# Justin
 def US02_birth_before_marriage_error(fam,husband,wife):
   if fam.marriageDateObject < husband.birthDateObject or fam.marriageDateObject < wife.birthDateObject:
     fam.errors.append("Marriage occured before birth date")
   
-
+# Angie
 def US03_check_birth_before_death_error(indiv):
   if indiv.alive == False and indiv.birthDateObject > indiv.deathDateObject:
     indiv.errors.append("Death date is before birth date")
 
-#Angie-US04
+# Angie
 def US04_check_marriage_before_spouse_death_error(fam,husband,wife):
   if husband.alive == False:
     if fam.marriageDateObject > husband.deathDateObject:
@@ -198,13 +191,13 @@ def US04_check_marriage_before_spouse_death_error(fam,husband,wife):
     if fam.marriageDateObject > wife.deathDateObject:
       fam.errors.append("Marriage date is after wife death date")
 
-#Liv-US05
+# Liv
 def US05_check_marriage_before_divorce_error(fam):
   if fam.divorced == True:
     if fam.marriageDateObject > fam.divorceDateObject:
       fam.errors.append("Divorce date is before marriage date")
 
-#Liv-US06
+# Liv
 def US06_check_divorce_before_spouse_death_error(fam,husband,wife):
   if fam.divorced == True:
     if husband.alive == False:
@@ -214,21 +207,22 @@ def US06_check_divorce_before_spouse_death_error(fam,husband,wife):
       if fam.divorceDateObject > wife.deathDateObject:
         fam.errors.append("Divorce date is after wife death date")
 
-
-#Jenn-US07
+# Jenn
 def US07_check_age_less_than_150_error(indiv):
   if int(indiv.age) > 150: 
     indiv.errors.append("Individual age greater than 150")
 
-# #before death of mother, before 9 months after death of father
-def US08_check_child_birth_before_parents_death_error(fam,wife,child):
+# Matt
+def US08_check_child_birth_before_mother_death_error(fam,wife,child):
   if wife.deathDateObject < child.birthDateObject:  
-    fam.errors.append("Child born after death of wife")
+    fam.errors.append("Child born after death of mother")
 
+# Jenn
 def US09_check_child_birth_before_marriage_anomaly(fam,child):
   if fam.marriageDateObject > child.birthDateObject: #marriage after birth
     fam.anomalies.append(child.Id + " born before parents married")    
 
+# Matt
 def US10_check_marriage_after_14_anomaly(fam,wife,husband):
   day1 = wife.birthDateObject
   day2 = fam.marriageDateObject 
@@ -243,10 +237,6 @@ def US10_check_marriage_after_14_anomaly(fam,wife,husband):
   # if int(wife.birthDateObject) - int(fam.marriageDateObject) > 14 and int(husband.birthDateObject) - int(fam.marriageDateObject) >14:
   #   fam.errors.append("error marriage before 14")
 
-# def US11_check_no_bigamy_anomaly(indiv):
-
-# need to add a US12
-
 # individual errors and anomalies
 def check_individuals_for_errors_and_anomalies():
   for indiv in individuals:
@@ -255,7 +245,6 @@ def check_individuals_for_errors_and_anomalies():
     US07_check_age_less_than_150_error(indiv)
     if indiv.alive == False:
       US01_check_date_before_today_error(indiv,"Death")
-    # US03_check_birth_before_death_error(indiv)
     
 # family errors and anomalies
 def check_families_for_errors_and_anomalies():
@@ -274,13 +263,7 @@ def check_families_for_errors_and_anomalies():
       child = get_individual_by_id(child_id)
       US09_check_child_birth_before_marriage_anomaly(fam,child)
       if wife.alive == False:
-        US08_check_child_birth_before_parents_death_error(fam,wife,child)
-
-# populate_gedcom_data(Gedcom_File)
-# check_families_for_errors_and_anomalies()
-# print_individuals_table(individual)
-# print('\n')
-# print_families_table(family)
+        US08_check_child_birth_before_mother_death_error(fam,wife,child)
 
 if __name__ == "__main__":
     Gedcom_File = open(sys.argv[1], "r") 
