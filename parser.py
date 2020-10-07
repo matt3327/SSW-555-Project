@@ -179,6 +179,10 @@ def US01_check_date_before_today_error(indiv_or_fam,identifier):
 
 
 # def US02_check_spouse_birth_before_marriage_error(fam,husband,wife):
+def US02_birth_before_marriage_error(fam,husband,wife):
+  if fam.marriageDateObject < husband.birthDateObject or fam.marriageDateObject < wife.birthDateObject:
+    fam.errors.append("Marriage occured before birth date")
+  
 
 def US03_check_birth_before_death_error(indiv):
   if indiv.alive == False and indiv.birthDateObject > indiv.deathDateObject:
@@ -249,7 +253,7 @@ def check_families_for_errors_and_anomalies():
     US01_check_date_before_today_error(fam,"Marriage")
     if fam.divorced == True:
       US01_check_date_before_today_error(fam,"Divorce")
-    # US02_check_spouse_birth_before_marriage_error(fam,husband,wife)
+    US02_birth_before_marriage_error(fam,husband,wife)
     US04_check_marriage_before_spouse_death_error(fam,husband,wife)
     US05_check_marriage_before_divorce_error(fam)
     US06_check_divorce_before_spouse_death_error(fam, husband, wife)
