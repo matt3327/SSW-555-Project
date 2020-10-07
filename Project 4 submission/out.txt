@@ -1,0 +1,38 @@
+Individuals
++-----+---------------------+--------+-------------+-----+-------+-------------+--------------+-----------------+------------------------------------------------------------------------+-----------+
+|  ID |         Name        | Gender |  Birth Date | Age | Alive |  Death Date | Child Family | Spouse Families |                                 Errors                                 | Anomalies |
++-----+---------------------+--------+-------------+-----+-------+-------------+--------------+-----------------+------------------------------------------------------------------------+-----------+
+|  I1 | Angelina /Zaccaria/ |   F    | 11 AUG 1999 |  21 |  True |             |      F1      |                 |                                                                        |           |
+|  I2 |   John /Zaccaria/   |   M    |  6 OCT 1943 |  77 |  True |             |      F2      |      ['F1']     |                                                                        |           |
+|  I3 |   Karen /Celeste/   |   F    | 19 JUL 1957 |  63 |  True |             |      F3      |      ['F1']     |                                                                        |           |
+|  I4 |  Nicholas /Celeste/ |   M    |  4 JAN 1937 |  83 |  True |             |              |      ['F3']     |                                                                        |           |
+|  I5 |  Marie /Quagliana/  |   F    | 28 JUN 1938 | -38 | False |  7 JUL 1900 |              |      ['F3']     | ['Death date is before birth date', 'Death date is before birth date'] |           |
+|  I6 |  Angelo /Zaccaria/  |   M    |  9 MAR 1920 |  60 | False | 11 APR 1980 |              |      ['F2']     |                                                                        |           |
+|  I7 |   Grace /Ialacci/   |   F    | 14 FEB 1922 |  91 | False |  6 MAY 2013 |              |      ['F2']     |                                                                        |           |
+|  I8 |   Frank /Zaccaria/  |   M    | 20 OCT 1950 |  70 |  True |             |      F2      |   ['F4', 'F5']  |                                                                        |           |
+|  I9 |    Marian /Smith/   |   F    | 11 AUG 1955 |  65 |  True |             |              |      ['F5']     |                                                                        |           |
+| I10 |   David /Zaccaria/  |   M    | 13 JUN 1979 |  41 |  True |             |      F5      |                 |                                                                        |           |
+| I11 |  Marcina /Zaccaria/ |   F    | 19 DEC 1981 |  38 |  True |             |      F5      |                 |                                                                        |           |
+| I12 |  Connie /Verranio/  |   F    | 14 OCT 1956 |  55 | False | 15 MAR 2012 |              |   ['F4', 'F6']  |                                                                        |           |
+| I13 |    Jerry /Tyther/   |   M    | 20 SEP 1955 |  45 | False | 15 DEC 2000 |              |      ['F6']     |                                                                        |           |
+| I14 |  Michelle /Tyther/  |   F    | 20 NOV 1978 |  41 |  True |             |      F6      |                 |                                                                        |           |
+| I15 |    Jeff /Tyther/    |   M    | 15 OCT 1977 |  43 |  True |             |      F6      |                 |                                                                        |           |
+| I16 |  Nicholas /Celeste/ |   M    |  5 AUG 1959 |  61 |  True |             |      F3      |   ['F7', 'F8']  |                                                                        |           |
+| I17 |      Jane /Doe/     |   F    |  1 JAN 1961 |  29 | False | 17 JUN 1990 |              |      ['F8']     |                                                                        |           |
+| I18 |     Lisa /Frock/    |   F    | 12 SEP 1962 |  58 |  True |             |              |      ['F7']     |                                                                        |           |
++-----+---------------------+--------+-------------+-----+-------+-------------+--------------+-----------------+------------------------------------------------------------------------+-----------+
+
+
+Families
++----+---------------+--------------+------------+--------------------+---------+-------------------+----------------+--------------------------------------------------------------------------------------------------------------------+-----------+
+| ID | Marriage Date | Divorce Date | Husband ID |    Husband Name    | Wife ID |     Wife Name     |   Child IDs    |                                                       Errors                                                       | Anomalies |
++----+---------------+--------------+------------+--------------------+---------+-------------------+----------------+--------------------------------------------------------------------------------------------------------------------+-----------+
+| F1 |  24 MAY 1950  |              |     I2     |  John /Zaccaria/   |    I3   |  Karen /Celeste/  |     ['I1']     |     ['Marriage occured before birth date', 'Wife married before 14 error', 'Husband married before 14 error']      |           |
+| F2 |  11 AUG 1940  |              |     I6     | Angelo /Zaccaria/  |    I7   |  Grace /Ialacci/  |  ['I2', 'I8']  |                                                                                                                    |           |
+| F3 |   1 JUN 1955  |              |     I4     | Nicholas /Celeste/ |    I5   | Marie /Quagliana/ | ['I3', 'I16']  | ['Marriage date is after wife death date', 'Child born after death of mother', 'Child born after death of mother'] |           |
+| F4 |  17 NOV 1995  |              |     I8     |  Frank /Zaccaria/  |   I12   | Connie /Verranio/ |                |                                                                                                                    |           |
+| F5 |  14 OCT 1977  | 14 SEP 1985  |     I8     |  Frank /Zaccaria/  |    I9   |   Marian /Smith/  | ['I10', 'I11'] |                                                                                                                    |           |
+| F6 |  17 OCT 1975  | 16 FEB 1980  |    I13     |   Jerry /Tyther/   |   I12   | Connie /Verranio/ | ['I14', 'I15'] |                                                                                                                    |           |
+| F7 |  13 NOV 1980  |              |    I16     | Nicholas /Celeste/ |   I18   |    Lisa /Frock/   |                |                                                                                                                    |           |
+| F8 |  13 DEC 1986  |              |    I16     | Nicholas /Celeste/ |   I17   |     Jane /Doe/    |                |                                                                                                                    |           |
++----+---------------+--------------+------------+--------------------+---------+-------------------+----------------+--------------------------------------------------------------------------------------------------------------------+-----------+
