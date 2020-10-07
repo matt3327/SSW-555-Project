@@ -165,7 +165,9 @@ def populate_gedcom_data(Gedcom_File):
 
 # def US02_check_spouse_birth_before_marriage_error(fam,husband,wife):
 
-# def US03_check_birth_before_death_error(indiv):
+def US03_check_birth_before_death_error(indiv):
+  if indiv.alive == False and indiv.birthDateObject > indiv.deathDateObject:
+    indiv.errors.append("Death date is before birth date")
 
 #Angie-US04
 def US04_check_marriage_before_spouse_death_error(fam,husband,wife):
@@ -204,11 +206,8 @@ def US07_check_age_less_than_150_error(indiv):
 # individual errors and anomalies
 def check_individual_for_errors_and_anomalies():
   for indiv in individuals:
+    US03_check_birth_before_death_error(indiv)
     US07_check_age_less_than_150_error(indiv)
-    # US01_check_date_before_today_error(indiv.birthDateObject)
-    # if indiv.alive == False:
-    #   US01_check_date_before_today_error(indiv.deathDateObject)
-    # US03_check_birth_before_death_error(indiv)
     
 # family errors and anomalies
 def check_families_for_errors_and_anomalies():
@@ -230,8 +229,8 @@ def check_families_for_errors_and_anomalies():
 
 if __name__ == "__main__":
     Gedcom_File = open(sys.argv[1], "r") 
-
     populate_gedcom_data(Gedcom_File)
+    check_individuals_for_errors_and_anomalies()
     check_families_for_errors_and_anomalies()
     check_individual_for_errors_and_anomalies()
     print_individuals_table()
