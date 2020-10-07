@@ -186,7 +186,11 @@ def US05_check_marriage_before_divorce_error(fam):
 
 # def US06_check_divorce_before_spouse_death_error(fam,husband,wife):
 
-# def US07_check_age_less_than_150_error(indiv):
+#Jenn-US07
+def US07_check_age_less_than_150_error(indiv):
+  if int(indiv.age) > 150: 
+    indiv.errors.append("Individual age greater than 150")
+
 
 # #before death of mother, before 9 months after death of father
 # def US08_check_child_birth_before_parents_death_error(fam,husband,wife,child):
@@ -200,12 +204,10 @@ def US05_check_marriage_before_divorce_error(fam):
 # need to add a US12
 
 # individual errors and anomalies
-def check_individuals_for_errors_and_anomalies():
+def check_individual_for_errors_and_anomalies():
   for indiv in individuals:
-    # US01_check_date_before_today_error(indiv.birthDateObject)
-    # if indiv.alive == False:
-    #   US01_check_date_before_today_error(indiv.deathDateObject)
     US03_check_birth_before_death_error(indiv)
+    US07_check_age_less_than_150_error(indiv)
     
 # family errors and anomalies
 def check_families_for_errors_and_anomalies():
@@ -230,6 +232,7 @@ if __name__ == "__main__":
     populate_gedcom_data(Gedcom_File)
     check_individuals_for_errors_and_anomalies()
     check_families_for_errors_and_anomalies()
+    check_individual_for_errors_and_anomalies()
     print_individuals_table()
     print('\n')
     print_families_table()
