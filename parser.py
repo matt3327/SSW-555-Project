@@ -184,7 +184,9 @@ def US02_birth_before_marriage_error(fam,husband,wife):
     fam.errors.append("Marriage occured before birth date")
   
 
-# def US03_check_birth_before_death_error(indiv):
+def US03_check_birth_before_death_error(indiv):
+  if indiv.alive == False and indiv.birthDateObject > indiv.deathDateObject:
+    indiv.errors.append("Death date is before birth date")
 
 #Angie-US04
 def US04_check_marriage_before_spouse_death_error(fam,husband,wife):
@@ -201,22 +203,30 @@ def US05_check_marriage_before_divorce_error(fam):
     if fam.marriageDateObject > fam.divorceDateObject:
       fam.errors.append("Divorce date is before marriage date")
 
-# def US06_check_divorce_before_spouse_death_error(fam,husband,wife):
+#Liv-US06
+def US06_check_divorce_before_spouse_death_error(fam,husband,wife):
+  if fam.divorced == True:
+    if husband.alive == False:
+      if fam.divorceDateObject > husband.deathDateObject:
+        fam.errors.append("Divorce date is after husband death date")
+    if wife.alive == False:
+      if fam.divorceDateObject > wife.deathDateObject:
+        fam.errors.append("Divorce date is after wife death date")
 
-# def US07_check_age_less_than_150_error(indiv):
 
-# def US08_check_child_birth_before_marriage_anomaly(fam,children):
-#   for child in children:
-#     if fam.marriageDateObject > child.birthDateObject:
-#       fam.errors.append("Child born before marriage of parents")
+#Jenn-US07
+def US07_check_age_less_than_150_error(indiv):
+  if int(indiv.age) > 150: 
+    indiv.errors.append("Individual age greater than 150")
 
 # #before death of mother, before 9 months after death of father
-# def US09_check_child_birth_before_parents_death_error(fam,husband,wife,children):
-#   for child in children:
-#     if husband.deathDateObject > child.birthDateObject
-#     fam.error.append("Child born after death of husband")
-#     elif wife.deathDateObject > child.birthDateObject
-#     fam.error.append("Child born after death of wife")
+
+#def US08_check_child_birth_before_parents_death_error(fam,husband,wife,child):
+
+#Jenn-US09
+def US09_check_child_birth_before_marriage_anomaly(fam,child):
+  if fam.marriageDateObject > child.birthDateObject: #marriage after birth
+    fam.anomalies.append(child.Id + " born before parents married")
 
 # def US10_check_marriage_after_14_anomaly(fam,husband,wife):
 
@@ -228,6 +238,8 @@ def US05_check_marriage_before_divorce_error(fam):
 def check_individuals_for_errors_and_anomalies():
   for indiv in individuals:
     US01_check_date_before_today_error(indiv,"Birth")
+    US03_check_birth_before_death_error(indiv)
+    US07_check_age_less_than_150_error(indiv)
     if indiv.alive == False:
       US01_check_date_before_today_error(indiv,"Death")
     # US03_check_birth_before_death_error(indiv)
@@ -237,16 +249,16 @@ def check_families_for_errors_and_anomalies():
   for fam in families:
     husband = get_individual_by_id(fam.husbandId)
     wife = get_individual_by_id(fam.wifeId)
-    children = []
-    for child in fam.children:
-      children.append(get_individual_by_id(child))
+    child = get_individual_by_id(child)
     US01_check_date_before_today_error(fam,"Marriage")
     if fam.divorced == True:
       US01_check_date_before_today_error(fam,"Divorce")
     US02_birth_before_marriage_error(fam,husband,wife)
     US04_check_marriage_before_spouse_death_error(fam,husband,wife)
     US05_check_marriage_before_divorce_error(fam)
-    #US08_check_child_birth_before_marriage_anomaly(fam, children)
+    US06_check_divorce_before_spouse_death_error(fam, husband, wife)
+    for child in fam.children:
+      US09_check_child_birth_before_marriage_anomaly(fam,child)
 
 # populate_gedcom_data(Gedcom_File)
 # check_families_for_errors_and_anomalies()
@@ -256,10 +268,10 @@ def check_families_for_errors_and_anomalies():
 
 if __name__ == "__main__":
     Gedcom_File = open(sys.argv[1], "r") 
-
     populate_gedcom_data(Gedcom_File)
     check_individuals_for_errors_and_anomalies()
     check_families_for_errors_and_anomalies()
+    check_individual_for_errors_and_anomalies()
     print_individuals_table()
     print('\n')
     print_families_table()
