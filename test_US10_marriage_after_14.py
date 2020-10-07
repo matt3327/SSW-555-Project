@@ -15,7 +15,7 @@ class Test(unittest.TestCase):
         fam.marriageDateObject = datetime(2013, 9 ,14)
         US10_check_marriage_after_14_anomaly(fam,wife,husband)
         self.assertEqual(len(fam.errors), 1)
-        self.assertEqual(fam.errors, [])  
+        self.assertEqual(fam.errors, ["Wife married before 14 error"])  
 
     def test_husbandYoungerThan14(self):
         wife = Individual("I1")
@@ -26,7 +26,7 @@ class Test(unittest.TestCase):
         fam.marriageDateObject = datetime(2013, 9 ,14)
         US10_check_marriage_after_14_anomaly(fam,wife,husband)
         self.assertEqual(len(fam.errors), 1)
-        self.assertEqual(fam.errors, []) 
+        self.assertEqual(fam.errors, ["Husband married before 14 error"]) 
 
     def test_bothOlderThan14(self):   
         wife = Individual("I1")
