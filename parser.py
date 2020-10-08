@@ -245,17 +245,17 @@ def US09_check_child_birth_before_marriage_anomaly(fam,child):
     fam.anomalies.append(child.Id + " born before parents married")    
 
 # Matt
-def US10_check_marriage_after_14_anomaly(fam,wife,husband):
-  day1 = wife.birthDateObject
+def US10_check_marriage_after_14_anomaly(fam):
+  day1 = fam.wifeObject.birthDateObject
   day2 = fam.marriageDateObject 
-  day3 = (abs((day2 - day1).days)/365)
-  day4 = husband.birthDateObject
+  day3 = (((day2 - day1).days)/365)
+  day4 = fam.husbandObject.birthDateObject
   day5 = fam.marriageDateObject 
-  day6 = (abs((day5 - day4).days)/365)
+  day6 = (((day5 - day4).days)/365)
   if day3 < 14:
-    fam.errors.append("Wife married before 14 error")
+    fam.anomalies.append("Wife married before 14 anomaly")
   if day6 < 14:
-    fam.errors.append("Husband married before 14 error")
+    fam.anomalies.append("Husband married before 14 anomaly")
   # if int(wife.birthDateObject) - int(fam.marriageDateObject) > 14 and int(husband.birthDateObject) - int(fam.marriageDateObject) >14:
   #   fam.errors.append("error marriage before 14")
 
@@ -280,7 +280,7 @@ def check_families_for_errors_and_anomalies():
       US06_check_divorce_before_spouse_death_error(fam, husband, wife)
     US02_birth_before_marriage_error(fam,husband,wife)
     US04_check_marriage_before_spouse_death_error(fam,husband,wife)
-    US10_check_marriage_after_14_anomaly(fam,wife,husband)
+    US10_check_marriage_after_14_anomaly(fam)
     for child_id in fam.childrenIds:
       child = get_individual_by_id(child_id)
       US09_check_child_birth_before_marriage_anomaly(fam,child)
