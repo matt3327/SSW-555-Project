@@ -234,9 +234,10 @@ def US07_check_age_less_than_150_error(indiv):
     indiv.errors.append("Individual age greater than 150")
 
 # Matt
-def US08_check_child_birth_before_mother_death_error(fam,wife,child):
-  if wife.deathDateObject < child.birthDateObject:  
-    fam.errors.append("Child born after death of mother")
+def US08_check_child_birth_before_mother_death_error(fam):
+  for child in fam.childrenObjects:
+    if fam.wifeObject.alive == False and fam.wifeObject.deathDateObject < child.birthDateObject:  
+      fam.errors.append("Child born after death of mother")
 
 # Jenn
 def US09_check_child_birth_before_marriage_anomaly(fam,child):
@@ -283,8 +284,7 @@ def check_families_for_errors_and_anomalies():
     for child_id in fam.childrenIds:
       child = get_individual_by_id(child_id)
       US09_check_child_birth_before_marriage_anomaly(fam,child)
-      if wife.alive == False:
-        US08_check_child_birth_before_mother_death_error(fam,wife,child)
+    US08_check_child_birth_before_mother_death_error(fam)
 
 if __name__ == "__main__":
     Gedcom_File = open(sys.argv[1], "r") 
