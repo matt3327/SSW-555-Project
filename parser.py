@@ -15,8 +15,10 @@ class Individual:
     self.alive = True
     self.deathDateString = ""
     self.deathDateObject = ""
-    self.childId = ""
+    self.childFamilyId = ""
+    self.childFamilyObject = ""
     self.spouseFamilyIds = []
+    self.spouseFamilyObjects = []
     self.errors = []
     self.anomalies = []
 
@@ -24,7 +26,7 @@ class Individual:
     self.spouseFamilyIds.append(familyId)
 
   def totalList(self):
-    return [self.Id,self.name,self.gender,self.birthDateString,self.age,self.alive,self.deathDateString,self.childId if len(self.childId) != 0 else "",self.spouseFamilyIds if len(self.spouseFamilyIds) != 0 else "",self.errors if len(self.errors) != 0 else "",self.anomalies if len(self.anomalies) != 0 else ""]
+    return [self.Id,self.name,self.gender,self.birthDateString,self.age,self.alive,self.deathDateString,self.childFamilyId if len(self.childFamilyId) != 0 else "",self.spouseFamilyIds if len(self.spouseFamilyIds) != 0 else "",self.errors if len(self.errors) != 0 else "",self.anomalies if len(self.anomalies) != 0 else ""]
 
 class Family:
   def __init__(self, Id):
@@ -36,17 +38,20 @@ class Family:
     self.divorced = False
     self.husbandId = ""
     self.husbandName = ""
+    self.husbandObject = ""
     self.wifeId = ""
     self.wifeName = ""
-    self.children = []
+    self.wifeObject = ""
+    self.childrenIds = []
+    self.childrenObjects = []
     self.errors = []
     self.anomalies = []
 
-  def addChild(self,childId):
-    self.children.append(childId)
+  def addChildId(self,childFamilyId):
+    self.childrenIds.append(childFamilyId)
     
   def totalList(self):
-    return [self.Id,self.marriageDateString,self.divorceDateString,self.husbandId,self.husbandName,self.wifeId,self.wifeName,self.children if len(self.children) != 0 else "",self.errors if len(self.errors) != 0 else "",self.anomalies if len(self.anomalies) != 0 else ""]
+    return [self.Id,self.marriageDateString,self.divorceDateString,self.husbandId,self.husbandName,self.wifeId,self.wifeName,self.childrenIds if len(self.childrenIds) != 0 else "",self.errors if len(self.errors) != 0 else "",self.anomalies if len(self.anomalies) != 0 else ""]
     
 def print_individuals_table():
   Prettable = PrettyTable()
@@ -73,6 +78,11 @@ def get_individual_by_id(individualId):
   for i in individuals:
     if i.Id == individualId:
       return i
+
+def get_family_by_id(familyId):
+  for f in families:
+    if f.Id == familyId:
+      return f
 
 def populate_gedcom_data(Gedcom_File): 
   findinglabels = False
@@ -103,7 +113,7 @@ def populate_gedcom_data(Gedcom_File):
           if label == "SEX":
             individuals[len(individuals)-1].gender = linelist[2]
           if label == "FAMC":
-            individuals[len(individuals)-1].childId = linelist[2].strip("@")
+            individuals[len(individuals)-1].childFamilyId = linelist[2].strip("@")
           if label == "FAMS":
             individuals[len(individuals)-1].addSpouseId(linelist[2].strip("@"))
           if label == "BIRT":
@@ -154,10 +164,21 @@ def populate_gedcom_data(Gedcom_File):
           if label == "DIV":
             lookingDivorce = True 
           if label == "CHIL":
-            families[len(families)-1].addChild(linelist[2].strip("@"))
+            families[len(families)-1].addChildId(linelist[2].strip("@"))
             
         except:
           pass
+
+def mapObjects():
+  for i in individuals:
+    i.childFamilyObject = get_family_by_id(i.childFamilyId)
+    for spouseFamily in i.spouseFamilyIds:
+      i.spouseFamilyObjects.append(get_family_by_id(spouseFamily))
+  for f in families:
+    f.wifeObject = get_individual_by_id(f.wifeId)
+    f.husbandObject = get_individual_by_id(f.husbandId)
+    for childId in f.childrenIds:
+      f.childrenObjects.append(get_individual_by_id(childId))
 
 # Justin
 def US01_check_date_before_today_error(indiv_or_fam,identifier):
@@ -187,7 +208,7 @@ def US04_check_marriage_before_spouse_death_error(fam,husband,wife):
   if husband.alive == False:
     if fam.marriageDateObject > husband.deathDateObject:
       fam.errors.append("Marriage date is after husband death date")
-  if wife.alive == False:
+  if wife.alive == False:  
     if fam.marriageDateObject > wife.deathDateObject:
       fam.errors.append("Marriage date is after wife death date")
 
@@ -259,7 +280,7 @@ def check_families_for_errors_and_anomalies():
     US02_birth_before_marriage_error(fam,husband,wife)
     US04_check_marriage_before_spouse_death_error(fam,husband,wife)
     US10_check_marriage_after_14_anomaly(fam,wife,husband)
-    for child_id in fam.children:
+    for child_id in fam.childrenIds:
       child = get_individual_by_id(child_id)
       US09_check_child_birth_before_marriage_anomaly(fam,child)
       if wife.alive == False:
@@ -268,6 +289,7 @@ def check_families_for_errors_and_anomalies():
 if __name__ == "__main__":
     Gedcom_File = open(sys.argv[1], "r") 
     populate_gedcom_data(Gedcom_File)
+    mapObjects()
     check_individuals_for_errors_and_anomalies()
     check_families_for_errors_and_anomalies()
     check_individuals_for_errors_and_anomalies()
