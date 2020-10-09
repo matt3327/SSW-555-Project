@@ -219,13 +219,13 @@ def US05_check_marriage_before_divorce_error(fam):
       fam.errors.append("Divorce date is before marriage date")
 
 # Liv
-def US06_check_divorce_before_spouse_death_error(fam,husband,wife):
+def US06_check_divorce_before_spouse_death_error(fam):
   if fam.divorced == True:
-    if husband.alive == False:
-      if fam.divorceDateObject > husband.deathDateObject:
+    if fam.husbandObject.alive == False:
+      if fam.divorceDateObject > fam.husbandObject.deathDateObject:
         fam.errors.append("Divorce date is after husband death date")
-    if wife.alive == False:
-      if fam.divorceDateObject > wife.deathDateObject:
+    if fam.wifeObject.alive == False:
+      if fam.divorceDateObject > fam.wifeObject.deathDateObject:
         fam.errors.append("Divorce date is after wife death date")
 
 # Jenn
@@ -276,8 +276,8 @@ def check_families_for_errors_and_anomalies():
     US01_check_date_before_today_error(fam,"Marriage")
     if fam.divorced == True:
       US01_check_date_before_today_error(fam,"Divorce")
-      US05_check_marriage_before_divorce_error(fam)
-      US06_check_divorce_before_spouse_death_error(fam, husband, wife)
+    US05_check_marriage_before_divorce_error(fam)
+    US06_check_divorce_before_spouse_death_error(fam)
     US02_birth_before_marriage_error(fam,husband,wife)
     US04_check_marriage_before_spouse_death_error(fam,husband,wife)
     US10_check_marriage_after_14_anomaly(fam)
