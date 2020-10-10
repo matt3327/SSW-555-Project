@@ -12,7 +12,8 @@ class Test(unittest.TestCase):
         testIndiv1= Individual("I1")
         testFam1.marriageDateObject = datetime(2019, 5, 3)
         testIndiv1.birthDateObject = datetime(2018, 5, 3)
-        US09_check_child_birth_before_marriage_anomaly(testFam1, testIndiv1)
+        testFam1.childrenObjects.append(testIndiv1)
+        US09_check_child_birth_before_marriage_anomaly(testFam1)
         self.assertEqual(len(testFam1.anomalies), 1)
         self.assertEqual(testFam1.anomalies[0], "I1 born before parents married")
     
@@ -21,7 +22,8 @@ class Test(unittest.TestCase):
         testIndiv2 = Individual("I2")
         testFam2.marriageDateObject = datetime(2018, 5, 3)
         testIndiv2.birthDateObject = datetime(2019, 5, 3)
-        US09_check_child_birth_before_marriage_anomaly(testFam2, testIndiv2)
+        testFam2.childrenObjects.append(testIndiv2)
+        US09_check_child_birth_before_marriage_anomaly(testFam2)
         self.assertEqual(len(testFam2.anomalies), 0)
         self.assertEqual(testFam2.anomalies, [])
 
@@ -30,9 +32,23 @@ class Test(unittest.TestCase):
         testIndiv3 = Individual("I3")
         testFam3.marriageDateObject = datetime(2018, 5, 3)
         testIndiv3.birthDateObject = datetime(2018, 5, 3)
-        US09_check_child_birth_before_marriage_anomaly(testFam3, testIndiv3)
+        US09_check_child_birth_before_marriage_anomaly(testFam3)
+        testFam3.childrenObjects.append(testIndiv3)
         self.assertEqual(len(testFam3.anomalies), 0)
         self.assertEqual(testFam3.anomalies, [])
+
+    def testBornBeforeAndAfter(self):
+        testFam4 = Family("F4")
+        testIndiv1 = Individual("I1")
+        testIndiv2 = Individual("I2")
+        testFam4.marriageDateObject = datetime(2018, 5, 3)
+        testIndiv1.birthDateObject = datetime(2018, 5, 2)
+        testFam4.childrenObjects.append(testIndiv1)
+        testIndiv2.birthDateObject = datetime(2019, 5, 3)
+        testFam4.childrenObjects.append(testIndiv2)
+        US09_check_child_birth_before_marriage_anomaly(testFam4)
+        self.assertEqual(len(testFam4.anomalies), 1)
+        self.assertEqual(testFam4.anomalies[0], "I1 born before parents married")
 
 
 if __name__ == "__main__":

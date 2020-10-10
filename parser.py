@@ -240,9 +240,10 @@ def US08_check_child_birth_before_mother_death_error(fam):
       fam.errors.append("Child born after death of mother")
 
 # Jenn
-def US09_check_child_birth_before_marriage_anomaly(fam,child):
-  if fam.marriageDateObject > child.birthDateObject: #marriage after birth
-    fam.anomalies.append(child.Id + " born before parents married")    
+def US09_check_child_birth_before_marriage_anomaly(fam):
+  for child in fam.childrenObjects:
+    if fam.marriageDateObject > child.birthDateObject: #marriage after birth
+      fam.anomalies.append(child.Id + " born before parents married")    
 
 # Matt
 def US10_check_marriage_after_14_anomaly(fam):
@@ -283,7 +284,7 @@ def check_families_for_errors_and_anomalies():
     US10_check_marriage_after_14_anomaly(fam)
     for child_id in fam.childrenIds:
       child = get_individual_by_id(child_id)
-      US09_check_child_birth_before_marriage_anomaly(fam,child)
+    US09_check_child_birth_before_marriage_anomaly(fam)
     US08_check_child_birth_before_mother_death_error(fam)
 
 if __name__ == "__main__":
