@@ -34,6 +34,20 @@ class Test(unittest.TestCase):
         self.assertEqual(len(testFam3.anomalies), 0)
         self.assertEqual(testFam3.anomalies, [])
 
+    
+    def testBornBeforeAndAfter(self):
+        testFam4 = Family("F4")
+        testIndiv1 = Individual("I1")
+        testIndiv2 = Individual("I2")
+        testFam4.marriageDateObject = datetime(2018, 5, 3)
+        testIndiv1.birthDateObject = datetime(2018, 5, 2)
+        testIndiv2.birthDateObject = datetime(2019, 5, 3)
+        US09_check_child_birth_before_marriage_anomaly(testFam4, testIndiv1)
+        US09_check_child_birth_before_marriage_anomaly(testFam4, testIndiv2)
+        self.assertEqual(len(testFam4.anomalies), 1)
+        self.assertEqual(testFam4.anomalies[0], "I1 born before parents married")
+
+
 
 if __name__ == "__main__":
     unittest.main()
