@@ -16,7 +16,7 @@ class Test(unittest.TestCase):
         husband.deathDateObject = datetime(2000, 1, 1)
         testFam.marriageDateObject = datetime(1999, 12, 31)
         US04_check_marriage_before_spouse_death_error(testFam,husband,wife)
-        self.assertEqual(len(testFam.errors), 0)
+        self.assertEqual(len(testFam.errors), 1)
         self.assertEqual(testFam.errors, [])
 
     def test_DeadHusband_InvalidDate(self):
