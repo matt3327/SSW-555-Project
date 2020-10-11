@@ -11,12 +11,12 @@ class Test(unittest.TestCase):
         husband = Individual("I1")
         wife = Individual("I2")
         testFam = Family("F1")
-        testFam.husbandId = husband.Id
-        testFam.wifeId = wife.Id
+        testFam.husbandObject = husband
+        testFam.wifeObject = wife
         husband.alive = False
         husband.deathDateObject = datetime(2000, 1, 1)
         testFam.marriageDateObject = datetime(1999, 12, 31)
-        US04_check_marriage_before_spouse_death_error(testFam,husband,wife)
+        US04_check_marriage_before_spouse_death_error(testFam)
         self.assertEqual(len(testFam.errors), 0)
         self.assertEqual(testFam.errors, [])
 
@@ -24,12 +24,12 @@ class Test(unittest.TestCase):
         husband = Individual("I1")
         wife = Individual("I2")
         testFam = Family("F1")
-        testFam.husbandId = husband.Id
-        testFam.wifeId = wife.Id
+        testFam.husbandObject = husband
+        testFam.wifeObject = wife
         husband.alive = False
         husband.deathDateObject = datetime(1999, 12, 31)
         testFam.marriageDateObject = datetime(2000, 1, 1)
-        US04_check_marriage_before_spouse_death_error(testFam,husband,wife)
+        US04_check_marriage_before_spouse_death_error(testFam)
         self.assertEqual(len(testFam.errors), 1)
         self.assertEqual(testFam.errors[0], "Marriage date is after husband death date")
 
@@ -37,12 +37,12 @@ class Test(unittest.TestCase):
         husband = Individual("I1")
         wife = Individual("I2")
         testFam = Family("F1")
-        testFam.husbandId = husband.Id
-        testFam.wifeId = wife.Id
+        testFam.husbandObject = husband
+        testFam.wifeObject = wife
         wife.alive = False
         wife.deathDateObject = datetime(2000, 1, 1)
         testFam.marriageDateObject = datetime(1999, 12, 31)
-        US04_check_marriage_before_spouse_death_error(testFam,husband,wife)
+        US04_check_marriage_before_spouse_death_error(testFam)
         self.assertEqual(len(testFam.errors), 0)
         self.assertEqual(testFam.errors, [])
 
@@ -50,12 +50,12 @@ class Test(unittest.TestCase):
         husband = Individual("I1")
         wife = Individual("I2")
         testFam = Family("F1")
-        testFam.husbandId = husband.Id
-        testFam.wifeId = wife.Id
+        testFam.husbandObject = husband
+        testFam.wifeObject = wife
         wife.alive = False
         wife.deathDateObject = datetime(1999, 12, 31)
         testFam.marriageDateObject = datetime(2000, 1, 1)
-        US04_check_marriage_before_spouse_death_error(testFam,husband,wife)
+        US04_check_marriage_before_spouse_death_error(testFam)
         self.assertEqual(len(testFam.errors), 1)
         self.assertEqual(testFam.errors[0], "Marriage date is after wife death date")
     
@@ -63,10 +63,10 @@ class Test(unittest.TestCase):
         husband = Individual("I1")
         wife = Individual("I2")
         testFam = Family("F1")
-        testFam.husbandId = husband.Id
-        testFam.wifeId = wife.Id
+        testFam.husbandObject = husband
+        testFam.wifeObject = wife
         testFam.marriageDateObject = datetime(2000, 1, 1)
-        US04_check_marriage_before_spouse_death_error(testFam,husband,wife)
+        US04_check_marriage_before_spouse_death_error(testFam)
         self.assertEqual(len(testFam.errors), 0)
         self.assertEqual(testFam.errors, [])
 
@@ -74,14 +74,14 @@ class Test(unittest.TestCase):
         husband = Individual("I1")
         wife = Individual("I2")
         testFam = Family("F1")
-        testFam.husbandId = husband.Id
-        testFam.wifeId = wife.Id
+        testFam.husbandObject = husband
+        testFam.wifeObject = wife
         husband.alive = False
         husband.deathDateObject = datetime(2000, 1, 1)
         wife.alive = False
         wife.deathDateObject = datetime(2000, 1, 2)
         testFam.marriageDateObject = datetime(1999, 12, 31)
-        US04_check_marriage_before_spouse_death_error(testFam,husband,wife)
+        US04_check_marriage_before_spouse_death_error(testFam)
         self.assertEqual(len(testFam.errors), 0)
         self.assertEqual(testFam.errors, [])
 
@@ -89,14 +89,14 @@ class Test(unittest.TestCase):
         husband = Individual("I1")
         wife = Individual("I2")
         testFam = Family("F1")
-        testFam.husbandId = husband.Id
-        testFam.wifeId = wife.Id
+        testFam.husbandObject = husband
+        testFam.wifeObject = wife
         husband.alive = False
         husband.deathDateObject = datetime(1999, 12, 30)
         wife.alive = False
         wife.deathDateObject = datetime(2000, 1, 1)
         testFam.marriageDateObject = datetime(1999, 12, 31)
-        US04_check_marriage_before_spouse_death_error(testFam,husband,wife)
+        US04_check_marriage_before_spouse_death_error(testFam)
         self.assertEqual(len(testFam.errors), 1)
         self.assertEqual(testFam.errors[0], "Marriage date is after husband death date")
 
@@ -104,14 +104,14 @@ class Test(unittest.TestCase):
         husband = Individual("I1")
         wife = Individual("I2")
         testFam = Family("F1")
-        testFam.husbandId = husband.Id
-        testFam.wifeId = wife.Id
+        testFam.husbandObject = husband
+        testFam.wifeObject = wife
         husband.alive = False
         husband.deathDateObject = datetime(2000, 1, 1)
         wife.alive = False
         wife.deathDateObject = datetime(1999, 12, 30)
         testFam.marriageDateObject = datetime(1999, 12, 31)
-        US04_check_marriage_before_spouse_death_error(testFam,husband,wife)
+        US04_check_marriage_before_spouse_death_error(testFam)
         self.assertEqual(len(testFam.errors), 1)
         self.assertEqual(testFam.errors[0], "Marriage date is after wife death date")
 
@@ -119,14 +119,14 @@ class Test(unittest.TestCase):
         husband = Individual("I1")
         wife = Individual("I2")
         testFam = Family("F1")
-        testFam.husbandId = husband.Id
-        testFam.wifeId = wife.Id
+        testFam.husbandObject = husband
+        testFam.wifeObject = wife
         husband.alive = False
         husband.deathDateObject = datetime(1999, 12, 30)
         wife.alive = False
         wife.deathDateObject = datetime(1999, 12, 31)
         testFam.marriageDateObject = datetime(2000, 1, 1)
-        US04_check_marriage_before_spouse_death_error(testFam,husband,wife)
+        US04_check_marriage_before_spouse_death_error(testFam)
         self.assertEqual(len(testFam.errors), 2)
         self.assertEqual(testFam.errors[0], "Marriage date is after husband death date")
         self.assertEqual(testFam.errors[1], "Marriage date is after wife death date")
