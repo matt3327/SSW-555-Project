@@ -1,5 +1,4 @@
 import unittest
-import parser
 from datetime import datetime
 from parser import Family
 from parser import Individual
