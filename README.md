@@ -10,7 +10,12 @@ install PrettyTable (for Windows):
 pip install PrettyTable
 ```
 
-To run new Python version:
+To run Gedcom parser:
 ```console
-python3 -u "parser.py" "Zaccaria.ged"
+python3 -u parser.py Zaccaria.ged
+```
+
+To run all test cases:
+```console
+for i in test_*; do echo $i; python3 -u $i; echo; echo; done
 ```

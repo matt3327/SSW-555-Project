@@ -1,5 +1,4 @@
 import unittest
-import parser
 from parser import Individual
 from parser import US07_check_age_less_than_150_error
 

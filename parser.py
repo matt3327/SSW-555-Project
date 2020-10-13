@@ -204,12 +204,12 @@ def US03_check_birth_before_death_error(indiv):
     indiv.errors.append("Death date is before birth date")
 
 # Angie
-def US04_check_marriage_before_spouse_death_error(fam,husband,wife):
-  if husband.alive == False:
-    if fam.marriageDateObject > husband.deathDateObject:
+def US04_check_marriage_before_spouse_death_error(fam):
+  if fam.husbandObject.alive == False:
+    if fam.marriageDateObject > fam.husbandObject.deathDateObject:
       fam.errors.append("Marriage date is after husband death date")
-  if wife.alive == False:  
-    if fam.marriageDateObject > wife.deathDateObject:
+  if fam.wifeObject.alive == False:  
+    if fam.marriageDateObject > fam.wifeObject.deathDateObject:
       fam.errors.append("Marriage date is after wife death date")
 
 # Liv
@@ -279,7 +279,7 @@ def check_families_for_errors_and_anomalies():
     US05_check_marriage_before_divorce_error(fam)
     US06_check_divorce_before_spouse_death_error(fam)
     US02_birth_before_marriage_error(fam)
-    US04_check_marriage_before_spouse_death_error(fam,husband,wife)
+    US04_check_marriage_before_spouse_death_error(fam)
     US10_check_marriage_after_14_anomaly(fam)
     for child_id in fam.childrenIds:
       child = get_individual_by_id(child_id)
