@@ -194,8 +194,8 @@ def US01_check_date_before_today_error(indiv_or_fam,identifier):
       indiv_or_fam.errors.append(identifier + " date is after current date")
 
 # Justin
-def US02_birth_before_marriage_error(fam,husband,wife):
-  if fam.marriageDateObject < husband.birthDateObject or fam.marriageDateObject < wife.birthDateObject:
+def US02_birth_before_marriage_error(fam):
+  if fam.marriageDateObject < fam.husbandObject.birthDateObject or fam.marriageDateObject < fam.wifeObject.birthDateObject:
     fam.errors.append("Marriage occured before birth date")
   
 # Angie
@@ -278,7 +278,7 @@ def check_families_for_errors_and_anomalies():
       US01_check_date_before_today_error(fam,"Divorce")
     US05_check_marriage_before_divorce_error(fam)
     US06_check_divorce_before_spouse_death_error(fam)
-    US02_birth_before_marriage_error(fam,husband,wife)
+    US02_birth_before_marriage_error(fam)
     US04_check_marriage_before_spouse_death_error(fam)
     US10_check_marriage_after_14_anomaly(fam)
     for child_id in fam.childrenIds:
