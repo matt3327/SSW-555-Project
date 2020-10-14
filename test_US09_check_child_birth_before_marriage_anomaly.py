@@ -6,49 +6,48 @@ from parser import US09_check_child_birth_before_marriage_anomaly
 
 class Test(unittest.TestCase):
 
+    def setUp(self):
+        self.testChild1 = Individual("I1") #child
+        self.testFam = Family("F1") #test family
+        self.testFam.marriageDateObject = datetime(2019, 5, 3) #marriage date
+        self.testFam.childrenObjects.append(self.testChild1) #added child
+        
     def testBornBeforeMarriage(self):
-        testFam1 = Family("F1")
-        testIndiv1= Individual("I1")
-        testFam1.marriageDateObject = datetime(2019, 5, 3)
-        testIndiv1.birthDateObject = datetime(2018, 5, 3)
-        testFam1.childrenObjects.append(testIndiv1)
-        US09_check_child_birth_before_marriage_anomaly(testFam1)
-        self.assertEqual(len(testFam1.anomalies), 1)
-        self.assertEqual(testFam1.anomalies[0], "I1 born before parents married")
+        testFam = self.testFam
+        testChild1 = self.testChild1
+        testChild1.birthDateObject = datetime(2018, 5, 3)
+        US09_check_child_birth_before_marriage_anomaly(testFam)
+        self.assertEqual(len(testFam.anomalies), 1)
+        self.assertEqual(testFam.anomalies[0], "I1 born before parents married")
     
     def testBornAfterMarriage(self):
-        testFam2 = Family("F1")
-        testIndiv2 = Individual("I2")
-        testFam2.marriageDateObject = datetime(2018, 5, 3)
-        testIndiv2.birthDateObject = datetime(2019, 5, 3)
-        testFam2.childrenObjects.append(testIndiv2)
-        US09_check_child_birth_before_marriage_anomaly(testFam2)
-        self.assertEqual(len(testFam2.anomalies), 0)
-        self.assertEqual(testFam2.anomalies, [])
+        testFam = self.testFam
+        testChild1 = self.testChild1
+        testChild1.birthDateObject = datetime(2020, 5, 3)
+        testFam.childrenObjects.append(testChild1)
+        US09_check_child_birth_before_marriage_anomaly(testFam)
+        self.assertEqual(len(testFam.anomalies), 0)
+        self.assertEqual(testFam.anomalies, [])
 
     def testBornOnMarriage(self):
-        testFam3 = Family("F3")
-        testIndiv3 = Individual("I3")
-        testFam3.marriageDateObject = datetime(2018, 5, 3)
-        testIndiv3.birthDateObject = datetime(2018, 5, 3)
-        US09_check_child_birth_before_marriage_anomaly(testFam3)
-        testFam3.childrenObjects.append(testIndiv3)
-        self.assertEqual(len(testFam3.anomalies), 0)
-        self.assertEqual(testFam3.anomalies, [])
+        testFam = self.testFam
+        testChild1 = self.testChild1
+        testChild1.birthDateObject = datetime(2019, 5, 3)
+        US09_check_child_birth_before_marriage_anomaly(testFam)
+        testFam.childrenObjects.append(testChild1)
+        self.assertEqual(len(testFam.anomalies), 0)
+        self.assertEqual(testFam.anomalies, [])
 
     def testBornBeforeAndAfter(self):
-        testFam4 = Family("F4")
-        testIndiv1 = Individual("I1")
-        testIndiv2 = Individual("I2")
-        testFam4.marriageDateObject = datetime(2018, 5, 3)
-        testIndiv1.birthDateObject = datetime(2018, 5, 2)
-        testFam4.childrenObjects.append(testIndiv1)
-        testIndiv2.birthDateObject = datetime(2019, 5, 3)
-        testFam4.childrenObjects.append(testIndiv2)
-        US09_check_child_birth_before_marriage_anomaly(testFam4)
-        self.assertEqual(len(testFam4.anomalies), 1)
-        self.assertEqual(testFam4.anomalies[0], "I1 born before parents married")
-
+        testFam = self.testFam
+        testChild1 = self.testChild1
+        testChild2 = Individual("I2")
+        testFam.childrenObjects.append(testChild2)
+        testChild1.birthDateObject = datetime(2018, 5, 3)
+        testChild2.birthDateObject = datetime(2020, 5, 3)
+        US09_check_child_birth_before_marriage_anomaly(testFam)
+        self.assertEqual(len(testFam.anomalies), 1)
+        self.assertEqual(testFam.anomalies[0], "I1 born before parents married")
 
 if __name__ == "__main__":
     unittest.main()
