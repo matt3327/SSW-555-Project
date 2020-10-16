@@ -1,8 +1,7 @@
 import unittest
 from datetime import datetime
-from parser import Individual
-from parser import Family
-from parser import US10_check_marriage_after_14_anomaly
+from parse_gedcom.parser import Individual, Family
+from parse_gedcom.sprint1_user_stories import US10_check_marriage_after_14_anomaly
 
 class Test(unittest.TestCase):
     def test_wifeYoungerThan14(self):

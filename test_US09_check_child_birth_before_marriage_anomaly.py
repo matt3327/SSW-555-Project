@@ -1,8 +1,7 @@
 import unittest
 from datetime import datetime
-from parser import Family
-from parser import Individual
-from parser import US09_check_child_birth_before_marriage_anomaly
+from parse_gedcom.parser import Individual, Family
+from parse_gedcom.sprint1_user_stories import US09_check_child_birth_before_marriage_anomaly
 
 class Test(unittest.TestCase):
 

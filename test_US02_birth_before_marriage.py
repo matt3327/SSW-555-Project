@@ -1,11 +1,9 @@
 import unittest
 from datetime import datetime
-from parser import Individual
-from parser import Family
-from parser import US02_birth_before_marriage_error
+from parse_gedcom.parser import Individual, Family
+from parse_gedcom.sprint1_user_stories import US02_birth_before_marriage_error
 
 class Test(unittest.TestCase):
-
 
 # def US02_birth_before_marriage_error(fam,husband,wife):
 #   if fam.marriageDateObject < husband.birthDateObject or fam.marriageDateObject < wife.birthDateObject:
