@@ -1,9 +1,5 @@
 from prettytable import PrettyTable
 from datetime import datetime
-from implement_user_stories import *
-from sprint1_user_stories import *
-import importlib
-import sys
 
 class Individual:
   def __init__(self, Id):
@@ -60,7 +56,7 @@ def print_individuals_table():
   for i in individuals:
     Prettable.add_row(i.totalList())
   print("Individuals")
-  print(Prettable)
+  print(Prettable, "\n")
   
 def print_families_table():
   Prettable = PrettyTable()
@@ -68,7 +64,7 @@ def print_families_table():
   for f in families:
     Prettable.add_row(f.totalList())
   print("Families")
-  print(Prettable)
+  print(Prettable, "\n")
 
 
 labels = ["INDI","NAME","SEX","BIRT","DEAT","FAMC","FAMS","FAM","MARR","HUSB","WIFE","CHIL","DIV","DATE","HEAD","TRLR","NOTE"]
@@ -180,14 +176,3 @@ def mapObjects():
     f.husbandObject = get_individual_by_id(f.husbandId)
     for childId in f.childrenIds:
       f.childrenObjects.append(get_individual_by_id(childId))
-
-if __name__ == "__main__":
-    Gedcom_File = open(sys.argv[1], "r") 
-    populate_gedcom_data(Gedcom_File)
-    mapObjects()
-    check_individuals_for_errors_and_anomalies()
-    check_families_for_errors_and_anomalies()
-    check_individuals_for_errors_and_anomalies()
-    print_individuals_table()
-    print('\n')
-    print_families_table()
