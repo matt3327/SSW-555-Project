@@ -1,4 +1,3 @@
-from prettytable import PrettyTable
 from datetime import datetime
 
 class Individual:
@@ -49,23 +48,6 @@ class Family:
     
   def totalList(self):
     return [self.Id,self.marriageDateString,self.divorceDateString,self.husbandId,self.husbandName,self.wifeId,self.wifeName,self.childrenIds if len(self.childrenIds) != 0 else "",self.errors if len(self.errors) != 0 else "",self.anomalies if len(self.anomalies) != 0 else ""]
-    
-def print_individuals_table():
-  Prettable = PrettyTable()
-  Prettable.field_names = ["ID","Name","Gender","Birth Date","Age","Alive","Death Date","Child Family","Spouse Families","Errors","Anomalies"]
-  for i in individuals:
-    Prettable.add_row(i.totalList())
-  print("Individuals")
-  print(Prettable, "\n")
-  
-def print_families_table():
-  Prettable = PrettyTable()
-  Prettable.field_names = ["ID","Marriage Date","Divorce Date","Husband ID","Husband Name","Wife ID","Wife Name","Child IDs","Errors","Anomalies"]
-  for f in families:
-    Prettable.add_row(f.totalList())
-  print("Families")
-  print(Prettable, "\n")
-
 
 labels = ["INDI","NAME","SEX","BIRT","DEAT","FAMC","FAMS","FAM","MARR","HUSB","WIFE","CHIL","DIV","DATE","HEAD","TRLR","NOTE"]
 individuals = []

@@ -1,6 +1,7 @@
 import sys
 from parser import *
 from implement_user_stories import *
+from print_tables import *
 
 Gedcom_File = open(sys.argv[1], "r") 
 populate_gedcom_data(Gedcom_File)
