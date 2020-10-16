@@ -20,4 +20,4 @@ jobs:
 
       # Runs commands using the runners shell
       - name: Run automated tests
-        run: for i in test_*; do echo $i; python3 -u $i; echo; echo; done
+        run: for i in test_*; do echo $i; python3 $i; echo; echo; done
