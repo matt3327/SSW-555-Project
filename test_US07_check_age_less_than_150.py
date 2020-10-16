@@ -1,6 +1,6 @@
 import unittest
 from datetime import datetime
-from parse_gedcom.parser import Individual, Family
+from parse_gedcom.parser import Individual
 from parse_gedcom.sprint1_user_stories import US07_check_age_less_than_150_error
 
 class Test(unittest.TestCase):

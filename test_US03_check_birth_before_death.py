@@ -1,6 +1,6 @@
 import unittest
 from datetime import datetime
-from parse_gedcom.parser import Individual, Family
+from parse_gedcom.parser import Individual
 from parse_gedcom.sprint1_user_stories import US03_check_birth_before_death_error
 
 class Test(unittest.TestCase):
