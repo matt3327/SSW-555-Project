@@ -12,7 +12,7 @@ pip install PrettyTable
 
 To run Gedcom parser:
 ```console
-python3 -u parser.py Zaccaria.ged
+python3 parse_gedcom Zaccaria.ged
 ```
 
 To run all test cases:
