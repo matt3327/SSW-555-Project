@@ -1,5 +1,5 @@
 from prettytable import PrettyTable
-# from parser import individuals, families
+from parser import individuals, families
 
 def print_individuals_table():
   Prettable = PrettyTable()
