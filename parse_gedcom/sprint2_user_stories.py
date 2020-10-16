@@ -1,5 +1,3 @@
-from datetime import datetime
-
 # US11 - Jenn
 
 # US12 - Jenn
