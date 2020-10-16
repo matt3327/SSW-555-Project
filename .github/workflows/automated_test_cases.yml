@@ -21,5 +21,4 @@ jobs:
       # Runs commands using the runners shell
       - name: Run automated tests
         run: |
-          pip3 install PrettyTable
           for i in test_*; do echo $i; python3 -u $i; echo; echo; done
