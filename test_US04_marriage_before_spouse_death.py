@@ -1,8 +1,7 @@
 import unittest
 from datetime import datetime
-from parser import Individual
-from parser import Family
-from parser import US04_check_marriage_before_spouse_death_error
+from parse_gedcom.parser import Individual, Family
+from parse_gedcom.sprint1_user_stories import US04_check_marriage_before_spouse_death_error
 
 class Test(unittest.TestCase):
 

@@ -1,8 +1,7 @@
 import unittest
 from datetime import datetime
-from parser import Individual
-from parser import Family
-from parser import US01_check_date_before_today_error 
+from parse_gedcom.parser import Individual, Family
+from parse_gedcom.sprint1_user_stories import US01_check_date_before_today_error 
 
 class Test(unittest.TestCase):
 
