@@ -259,6 +259,23 @@ def US10_check_marriage_after_14_anomaly(fam):
   # if int(wife.birthDateObject) - int(fam.marriageDateObject) > 14 and int(husband.birthDateObject) - int(fam.marriageDateObject) >14:
   #   fam.errors.append("error marriage before 14")
 
+
+#Justin John 
+#Mother should be less than 60 years older than her children and father should be less than 80 years older than his children 
+def US14_Parents_not_too_old(fam,child):
+  day1 = fam.wifeObject.birthDateObject
+  day2 = child.birthDateObject
+  day3 = (((day2 - day1).days)/365)
+  day4 = fam.husbandObject.birthDateObject
+  day5 = child.birthDateObject 
+  day6 = (((day5 - day4).days)/365) 
+  if day3 >= 60 :
+    fam.anomalies.append("Mother is 60 years older than child/ren")
+  if day6 >= 80:
+    fam.anomalies.append("Father is 80 years older than child/ren")
+
+
+
 # individual errors and anomalies
 def check_individuals_for_errors_and_anomalies():
   for indiv in individuals:
@@ -284,6 +301,7 @@ def check_families_for_errors_and_anomalies():
     for child_id in fam.childrenIds:
       child = get_individual_by_id(child_id)
       US09_check_child_birth_before_marriage_anomaly(fam,child)
+      US14_Parents_not_too_old(fam,child)
     US08_check_child_birth_before_mother_death_error(fam)
 
 if __name__ == "__main__":
