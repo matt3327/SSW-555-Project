@@ -17,7 +17,7 @@ class Test(unittest.TestCase):
         testChild1.birthDateObject = datetime(2020, 5, 3)
         US12_check_child_birth_after_divorce_anomaly(testFam)
         self.assertEqual(len(testFam.anomalies), 1)
-        self.assertEqual(testFam.anomalies[0], "I1 born after parents divorced")
+        self.assertEqual(testFam.anomalies[0], "I1 born over 9 months after parents divorced")
     
     def testBornBeforeDivorce(self):
         testFam = self.testFam
@@ -46,7 +46,16 @@ class Test(unittest.TestCase):
         testChild2.birthDateObject = datetime(2020, 5, 3)
         US12_check_child_birth_after_divorce_anomaly(testFam)
         self.assertEqual(len(testFam.anomalies), 1)
-        self.assertEqual(testFam.anomalies[0], "I2 born after parents divorced")
+        self.assertEqual(testFam.anomalies[0], "I2 born over 9 months after parents divorced")
+
+    def ParentsNotDivorced(self):
+        testFam = Family("F2")
+        testChild1 = self.testChild1
+        testChild1.birthDateObject = datetime(2018, 5, 3)
+        US12_check_child_birth_after_divorce_anomaly(testFam)
+        testFam.childrenObjects.append(testChild1)
+        self.assertEqual(len(testFam.anomalies), 0)
+        self.assertEqual(testFam.anomalies, [])
 
 if __name__ == "__main__":
     unittest.main()
